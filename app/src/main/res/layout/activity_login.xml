@@ -53,8 +53,7 @@
             android:text="자동로그인"/>
 
     <Button
-            android:id="@+id/login"
-            android:enabled="false"
+            android:id="@+id/login_button"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -74,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray"
-            app:layout_constraintTop_toBottomOf ="@id/login"
+            app:layout_constraintTop_toBottomOf ="@id/login_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="50dp"
@@ -85,7 +84,7 @@
             android:tooltipText="Sign in with Google"
             android:layout_width="315dp"
             android:layout_height="55dp"
-            app:layout_constraintTop_toBottomOf="@id/login"
+            app:layout_constraintTop_toBottomOf="@id/login_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="100dp"
