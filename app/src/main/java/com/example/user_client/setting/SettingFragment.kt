@@ -1,4 +1,4 @@
-package com.example.user_client.navigation
+package com.example.user_client.setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
