@@ -1,4 +1,4 @@
-package com.example.user_client.navigation
+package com.example.user_client.search
 
 import android.os.Bundle
 import android.util.Log

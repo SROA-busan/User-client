@@ -3,12 +3,14 @@ package com.example.user_client
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.example.user_client.databinding.MainActivityBinding
-import com.example.user_client.navigation.ReserveFragment
-import com.example.user_client.navigation.SearchFragment
-import com.example.user_client.navigation.SettingFragment
+import com.example.user_client.reserve.InputReserveFragment
+import com.example.user_client.reserve.SelectReserveFragment
+import com.example.user_client.search.SearchFragment
+import com.example.user_client.setting.SettingFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
 
     private var binding:MainActivityBinding? = null
     private val view get() = binding!!
@@ -18,15 +20,15 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
-        replaceFragment(ReserveFragment())
-        setFragment()
+        replaceFragment(MainFragment())
+        setNavFragment()
     }
 
-    private fun setFragment(){
+    private fun setNavFragment(){
         view.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.reserve -> {
-                    replaceFragment(ReserveFragment())
+                    replaceFragment(InputReserveFragment())
                     true
                 }
                 R.id.search -> {
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+    }
+
+    fun changeReserveFragment(fragmentName: String){
+        when(fragmentName){
+            "select" -> replaceFragment(SelectReserveFragment())
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.user_client.navigation
+package com.example.user_client
 
 import android.os.Bundle
 import android.util.Log
@@ -6,22 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.user_client.R
-import com.example.user_client.databinding.NavFragmentReserveBinding
-import com.example.user_client.viewPager.SlideFragmentFirst
-import com.example.user_client.viewPager.SlideFragmentSecond
+import com.example.user_client.databinding.NavFragmentMainBinding
 
-class ReserveFragment : Fragment() {
-    private var binding: NavFragmentReserveBinding? = null
+class MainFragment : Fragment() {
+    private var binding: NavFragmentMainBinding? = null
     private val view get() = binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.v("ReserveFragment", "yes")
-        binding = NavFragmentReserveBinding.inflate(inflater, container, false)
+        binding = NavFragmentMainBinding.inflate(inflater, container, false)
 //        view.viewpager.adapter = ViewPagerAdapter(this)
-        return inflater.inflate(R.layout.nav_fragment_reserve, container, false)
+        return inflater.inflate(R.layout.nav_fragment_main, container, false)
     }
 
 //    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
