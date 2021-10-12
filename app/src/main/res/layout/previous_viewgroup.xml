@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="120dp">
+
+    <TextView
+            android:text="10:12 오전 10:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/datetime"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/pageMargin"
+            android:layout_marginStart="@dimen/pageMargin"
+            android:layout_marginTop="@dimen/pageMarginHalf"/>
+
+    <TextView
+            android:text="냉장고"
+            android:textSize="@dimen/font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product"
+            app:layout_constraintTop_toBottomOf="@+id/datetime"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/pageMargin"
+            android:layout_marginStart="@dimen/pageMargin"
+            android:textColor="#000000"/>
+
+    <TextView
+            android:text="얼음을 꺼냈는데 얼어있어요\n냉장고에 물을 넣었더니 안따뜻해요"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textarea"
+            app:layout_constraintTop_toBottomOf="@+id/product"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/pageMargin"
+            android:layout_marginStart="@dimen/pageMargin"/>
+
+    <TextView
+            android:id="@+id/process"
+            android:text="@string/ongoing"
+            android:layout_width="@dimen/recyclerTag"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/button_shape"
+            android:backgroundTint="@color/green"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/pageMarginHalf"
+            android:layout_marginRight="@dimen/pageMargin"
+            android:layout_marginEnd="@dimen/pageMargin"/>
+
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/baseline_more_vert_24"
+            android:id="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="@dimen/pageMargin"
+            android:layout_marginEnd="@dimen/pageMargin"
+            android:layout_marginTop="@dimen/pageMarginHalf"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

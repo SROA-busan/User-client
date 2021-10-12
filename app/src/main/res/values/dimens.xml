@@ -12,8 +12,9 @@
     <dimen name="table_layout_margin">5dp</dimen>
     <dimen name="reserve_info_edit">260dp</dimen>
     <dimen name="image_person">60dp</dimen>
+    <dimen name="pageMarginHalf">10dp</dimen>
     <dimen name="pageMargin">20dp</dimen>
-    <dimen name="offset">20dp</dimen>
     <dimen name="pageMarginAndOffset">40dp</dimen>
     <dimen name="frameSize">320dp</dimen>
+    <dimen name="recyclerTag">80dp</dimen>
 </resources>

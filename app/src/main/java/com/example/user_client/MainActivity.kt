@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.user_client.databinding.MainActivityBinding
-import com.example.user_client.reserve.InputReserveFragment
-import com.example.user_client.reserve.SelectReserveFragment
+//import com.example.user_client.reserve.InputReserveFragment
+//import com.example.user_client.reserve.SelectReserveFragment
 import com.example.user_client.search.SearchFragment
 import com.example.user_client.setting.SettingFragment
 
@@ -28,7 +28,7 @@ class MainActivity : FragmentActivity() {
         view.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.reserve -> {
-                    replaceFragment(InputReserveFragment())
+//                    replaceFragment(InputReserveFragment())
                     true
                 }
                 R.id.search -> {
@@ -46,7 +46,7 @@ class MainActivity : FragmentActivity() {
 
     fun changeReserveFragment(fragmentName: String){
         when(fragmentName){
-            "select" -> replaceFragment(SelectReserveFragment())
+//            "select" -> replaceFragment(SelectReserveFragment())
         }
     }
 
