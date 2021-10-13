@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent" android:background="#00FFFFFF"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 >
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/layout_width"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reserve_info_height"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:background="#56C4F6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/reserve_info_box"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="40dp"
             android:id="@+id/constraintLayout">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/linearLayout">
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout">
             <TextView
                     android:id="@+id/name"
                     android:text="홍길동"
@@ -35,21 +41,23 @@
                     android:id="@+id/phone"
                     android:text="010-4027-5019"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-            />
-        </LinearLayout>
+                    android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
         <TextView
                 android:id="@+id/address"
                 android:text="부산 남구 유엔평화로 29번길 99"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <CalendarView
             android:layout_width="@dimen/layout_width"
-            android:layout_height="wrap_content" android:id="@+id/calendarView2"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarView2"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
     <TableLayout
             android:layout_width="@dimen/layout_width"
             android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/calendarView2"
@@ -99,16 +107,26 @@
     </TableLayout>
     <Button
             android:text="이전"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button_before"
-            app:layout_constraintStart_toStartOf="@+id/calendarView2"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            android:background="@drawable/button_shape"
+            android:backgroundTint="@color/skyblue"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:id="@+id/button_before"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:layout_marginLeft="@dimen/button_side_margin"
+            android:layout_marginStart="@dimen/button_side_margin"/>
     <Button
             android:text="다음"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/button_next"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            app:layout_constraintEnd_toEndOf="@+id/calendarView2"
-            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            android:background="@drawable/button_shape"
+            android:backgroundTint="@color/skyblue"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:id="@+id/button_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:layout_marginRight="@dimen/button_side_margin"
+            android:layout_marginEnd="@dimen/button_side_margin"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

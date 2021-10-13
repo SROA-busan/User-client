@@ -31,10 +31,9 @@ class InputReserveFragment : Fragment() , View.OnClickListener{
         super.onDestroyView()
         binding = null
     }
-
+    //클릭 이벤트
     override fun onClick(v: View?) {
-        Log.v("view : ", v.toString())
-        when(v?.id){
+        when(v!!.id){
             R.id.reserve_button_next -> {
                 //MainActivity의 새 인스턴스로 초기화 하는 것이 아닌 올바른 상위 인스턴스로 초기화 해야한다.
                 val mainActivityView = activity as MainActivity
