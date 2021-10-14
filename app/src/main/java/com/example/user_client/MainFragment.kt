@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
         Log.v("ReserveFragment", "yes")
         binding = NavFragmentMainBinding.inflate(inflater, container, false)
 //        view.viewpager.adapter = ViewPagerAdapter(this)
-        return inflater.inflate(R.layout.nav_fragment_main, container, false)
+        return view.root
     }
 
 //    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {

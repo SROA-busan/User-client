@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:text="홍길동"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/product"
+                android:layout_marginTop="@dimen/pageMarginAndOffset"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+
+        <TextView
+                android:text="냉장고가 시원해요 \n이거 맞아요? \n 배고프다 유가네 가고싶다 \n 아침먹고올껄 \n 5줄"
+                android:layout_width="@dimen/layout_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:lines="5"
+                android:gravity="top|left"
+                android:scrollHorizontally="false"
+                android:minWidth="10dip"
+                android:maxWidth="5dip"
+                android:id="@+id/textArea"/>
+
+        <TextView
+                android:text="문의일시 : 2021년 10월 12일 오전 10:30 ~ 11:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:layout_marginTop="@dimen/pageMargin"
+                android:textSize="18sp"
+                android:id="@+id/Inquiry_date"/>
+
+        <Button
+                android:text="전화"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:textColor="#000000"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:layout_marginTop="@dimen/pageMargin"
+                android:background="@drawable/button_shape"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="45dp"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/baseline_call_24"
+                />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#94000000"
+                android:layout_marginTop="@dimen/pageMarginAndOffset"/>
+
+        <TextView
+                android:text="고객주소"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_address"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:layout_marginTop="@dimen/pageMarginAndOffset"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:text="부산 남구 대연동 635-31 506호\n(도로명)부산 남구 유엔평화로 29번길 99 506호"
+                android:layout_width="@dimen/layout_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:lines="2"
+                android:gravity="top|left"
+                android:id="@+id/user_address_info"/>
+
+        <View
+                android:layout_gravity="center"
+                android:layout_width="360dp"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="@dimen/pageMargin"
+                />
+
+        <TextView
+                android:text="서비스센터"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineer_address"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:layout_marginTop="@dimen/pageMargin"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:text="담당센터 : 삼성 부산 대연 서비스센터\n(031-1135-1234)\n담당기사 : 이택진"
+                android:layout_width="@dimen/layout_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pageMargin"
+                android:layout_marginStart="@dimen/pageMargin"
+                android:lines="3"
+                android:gravity="top|left"
+                android:id="@+id/engineer_address_info"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="@dimen/pageMargin">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:text="이전"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTint="@color/skyblue"
+                    android:id="@+id/appCompatButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="@dimen/button_side_margin"
+                    android:layout_marginStart="@dimen/button_side_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/button_bottom_margin"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:text="확인"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:background="@drawable/button_shape"
+                    android:backgroundTint="@color/blue"
+                    android:id="@+id/confirm"
+                    android:layout_marginEnd="@dimen/button_side_margin"
+                    android:layout_marginRight="@dimen/button_side_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/button_bottom_margin"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

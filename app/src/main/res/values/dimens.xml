@@ -1,19 +1,31 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_vertical_margin">20dp</dimen>
-    <dimen name="login_side_margin">24dp</dimen>
-    <dimen name="login_top_margin">120dp</dimen>
     <dimen name="font_size">20sp</dimen>
-
+<!--    login page-->
+    <dimen name="login_side_margin">24dp</dimen>
+    <dimen name="login_top_margin">60dp</dimen>
+<!--버튼 -->
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_width">80dp</dimen>
+    <dimen name="button_bottom_margin">40dp</dimen>
+    <dimen name="button_side_margin">45dp</dimen>
+<!--    이미지-->
+    <dimen name="image_person_margin">20dp</dimen>
+    <dimen name="image_person">60dp</dimen>
     <dimen name="image_person_side_margin">20dp</dimen>
     <dimen name="image_person_top_margin">120dp</dimen>
-    <dimen name="layout_width">320dp</dimen>
-    <dimen name="image_person_margin">20dp</dimen>
+<!--    예약 선택 페이지-->
     <dimen name="table_layout_margin">5dp</dimen>
+    <dimen name="recyclerTag">80dp</dimen>
+<!--    예약 입력페이지-->
     <dimen name="reserve_info_edit">260dp</dimen>
-    <dimen name="image_person">60dp</dimen>
+    <dimen name="reserve_info_height">80dp</dimen>
+<!--    페이지 마진-->
+    <dimen name="pageMarginHalf">10dp</dimen>
     <dimen name="pageMargin">20dp</dimen>
-    <dimen name="offset">20dp</dimen>
     <dimen name="pageMarginAndOffset">40dp</dimen>
-    <dimen name="frameSize">320dp</dimen>
+<!--    최대 넓이-->
+    <dimen name="layout_width">320dp</dimen>
+    <dimen name="frame_size">320dp</dimen>
 </resources>

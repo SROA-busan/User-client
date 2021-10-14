@@ -11,7 +11,7 @@
     <RelativeLayout
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/frameSize"
+            android:layout_height="@dimen/frame_size"
             android:orientation="vertical">
 
 
