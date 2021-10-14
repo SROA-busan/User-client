@@ -4,7 +4,7 @@
     <dimen name="font_size">20sp</dimen>
 <!--    login page-->
     <dimen name="login_side_margin">24dp</dimen>
-    <dimen name="login_top_margin">120dp</dimen>
+    <dimen name="login_top_margin">60dp</dimen>
 <!--버튼 -->
     <dimen name="button_height">40dp</dimen>
     <dimen name="button_width">80dp</dimen>

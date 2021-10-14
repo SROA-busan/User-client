@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">User-client</string>
+    <string name="app_name">Userclient</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_id">아이디</string>
     <string name="prompt_email">이메일</string>
