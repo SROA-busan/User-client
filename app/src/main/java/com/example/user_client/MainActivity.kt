@@ -10,11 +10,12 @@ import com.example.user_client.reserve.InputReserveFragment
 import com.example.user_client.reserve.SelectReserveFragment
 import com.example.user_client.search.SearchFragment
 import com.example.user_client.setting.SettingFragment
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     private var binding: MainActivityBinding? = null
-    private val view get() = binding!!
+    val view get() = binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,10 +71,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     //프레그먼트 변경
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         //TODO replace를 쓰게되면 새로운 창을 여는 것 --> 이전상태가 저장이 안된다 --> 조회 -> 설정 -> 조회로 가면 조회가 초기화됨
-        fragmentTransaction.replace(R.id.bottom_nav_frame, fragment)
-        fragmentTransaction.commit()
+        try{
+            fragmentTransaction.replace(R.id.bottom_nav_frame, fragment)
+            fragmentTransaction.commit()
+        } catch (e : Exception){
+            e.printStackTrace()
+        }
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }

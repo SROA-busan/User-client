@@ -28,4 +28,11 @@
 <!--    최대 넓이-->
     <dimen name="layout_width">320dp</dimen>
     <dimen name="frame_size">320dp</dimen>
+<!--    조회 페이지-->
+    <dimen name="main_menu_margin_top">10dp</dimen>
+    <dimen name="main_menu_height">60dp</dimen>
+    <dimen name="main_menu_weight">300dp</dimen>
+    <dimen name="arrow_length">25dp</dimen>
+    <dimen name="arrow_margin_top">30dp</dimen>
+    <dimen name="menu_font_size"> 20sp</dimen>
 </resources>
