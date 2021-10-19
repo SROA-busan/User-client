@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.SignUpActivity">
+
+    <TextView
+            android:text="아이디"
+            android:layout_width="@dimen/title_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_id"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/login_side_margin"
+            android:layout_marginStart="@dimen/login_side_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/sign_up_top_margin"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edit_user_id"
+            app:layout_constraintStart_toEndOf="@+id/user_id"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/sign_up_top_margin"/>
+
+    <TextView
+            android:text="비밀번호"
+            android:layout_width="@dimen/title_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_pw"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/login_side_margin"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_id"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/edit_user_pw"
+            app:layout_constraintStart_toEndOf="@+id/user_pw"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_id"/>
+
+    <TextView
+            android:text="이름"
+            android:layout_width="@dimen/title_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/login_side_margin"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_pw"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edit_user_name"
+            app:layout_constraintStart_toEndOf="@+id/user_name"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_pw"/>
+
+    <TextView
+            android:text="주소"
+            android:layout_width="@dimen/title_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_address"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/login_side_margin"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:ems="10"
+            android:id="@+id/edit_user_address"
+            app:layout_constraintStart_toEndOf="@+id/user_address"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"/>
+
+    <TextView
+            android:text="전화번호"
+            android:layout_width="@dimen/title_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_phone"
+            android:textSize="@dimen/font_size"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/login_side_margin"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_address"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/edit_user_phone"
+            app:layout_constraintStart_toEndOf="@+id/user_phone"
+            android:layout_marginTop="@dimen/sign_up_top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/user_address"/>
+
+    <Button
+            android:text="확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_up_confirm_button"
+            app:layout_constraintTop_toBottomOf="@+id/edit_user_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

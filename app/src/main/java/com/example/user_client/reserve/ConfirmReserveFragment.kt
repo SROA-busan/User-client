@@ -11,7 +11,7 @@ import com.example.user_client.MainFragment
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentConfirmBinding
 
-class ConfirmReserveFragment : Fragment(), View.OnClickListener{
+class ConfirmReserveFragment : Fragment(){
     private var binding : ReserveFragmentConfirmBinding? = null
     private val view get() = binding!!
 
@@ -19,8 +19,10 @@ class ConfirmReserveFragment : Fragment(), View.OnClickListener{
         binding = ReserveFragmentConfirmBinding.inflate(inflater, container, false)
 
         //버튼클릭 이벤트
-        view.confirmButtonPrevious.setOnClickListener(this) //이전
-        view.confirmButtonConfirm.setOnClickListener(this)  //확인
+        view.confirmButtonPrevious.setOnClickListener{
+            val mMainActivity = activity as MainActivity
+            mMainActivity.changeReserveFragment("select")
+        } //이전
         return view.root
     }
 
@@ -29,13 +31,4 @@ class ConfirmReserveFragment : Fragment(), View.OnClickListener{
         super.onDestroyView()
     }
 
-    override fun onClick(v: View?) {
-        val mMainActivity = activity as MainActivity
-        when(v!!.id){
-            R.id.confirm_button_confirm -> {
-                //TODO 확인버튼 누르면 bottomNavigationBar의 홈버튼 클릭 이벤트를 실행하도록
-            }
-            R.id.confirm_button_previous -> {mMainActivity.changeReserveFragment("select")}
-        }
-    }
 }

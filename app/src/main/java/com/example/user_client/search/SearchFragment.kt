@@ -1,38 +1,63 @@
 package com.example.user_client.search
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.example.user_client.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.user_client.MainActivity
 import com.example.user_client.databinding.SearchFragmentMainBinding
+import com.example.user_client.dto.SearchData
 
 class SearchFragment : Fragment() {
+    companion object{
+        val dataset = ArrayList<SearchData>()
+    }
     private var binding : SearchFragmentMainBinding? = null
     private val view get() = binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = SearchFragmentMainBinding.inflate(inflater, container, false)
+        //툴바 타이틀 설정
+        val mMainactivity = activity as MainActivity
+        mMainactivity.setTitle("조회")
 
+        //recyclerView 호출
+        val mRecyclerView = view.searchRecyclerMain
+        val mSearchMain = SearchData()
+        dataset.add(mSearchMain)
+        //어댑터 설정
+        mRecyclerView.adapter = SearchAdapter(dataset)
+        //layoutManager 설정
+        mRecyclerView.layoutManager = LinearLayoutManager(container!!.context)
 
-        //예약현황
+        //예약현황 버튼
         view.reserveMain.setOnClickListener{
             //내역
             if(view.searchRecyclerMain.isVisible){
                 view.searchRecyclerMain.visibility = View.GONE
-                //버튼 화살표
+                //버튼 화살표 애니메이션
                 view.arrow.animate().rotation(0f)
             }
             else{
                 view.searchRecyclerMain.visibility = View.VISIBLE
                 view.arrow.animate().rotation(90f)
             }
+        }
+        //수리현황 메뉴
+        view.reserveCurrent.setOnClickListener {
+            startActivity(Intent(context, SearchCurrent::class.java))
+        }
+        //이전수리 메뉴
+        view.reservePrevious.setOnClickListener {
+            startActivity(Intent(context, SearchPrevious::class.java))
         }
 
         return view.root

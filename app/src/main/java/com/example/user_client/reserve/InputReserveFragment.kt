@@ -1,19 +1,13 @@
 package com.example.user_client.reserve
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.user_client.MainActivity
 import com.example.user_client.R
-import com.example.user_client.databinding.LoginActivityBinding.inflate
 import com.example.user_client.databinding.ReserveFragmentInputBinding
-import java.util.zip.Inflater
 
 class InputReserveFragment : Fragment() , View.OnClickListener{
     private var binding: ReserveFragmentInputBinding? = null
@@ -21,6 +15,8 @@ class InputReserveFragment : Fragment() , View.OnClickListener{
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ReserveFragmentInputBinding.inflate(inflater, container, false)
+        val mMainactivity = activity as MainActivity
+        mMainactivity.setTitle("예약")
 
         //Fragment는 Activity와 다르게 자체적으로 View.OnclickListener를 가지고있지 않으므로 상속받아 구현해줘야 한다.
         view.reserveButtonNext.setOnClickListener(this)

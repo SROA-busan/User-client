@@ -16,7 +16,6 @@ class SelectReserveFragment :Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ReserveFragmentReserveBinding.inflate(inflater, container, false)
-
         //클릭 이벤트 셋팅
         view.buttonNext.setOnClickListener(this)
         view.buttonBefore.setOnClickListener(this)

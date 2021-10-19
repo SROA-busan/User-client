@@ -8,6 +8,15 @@
         android:orientation="vertical"
         tools:context=".MainActivity"
         >
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/skyblue"
+            app:title="test"
+            app:titleTextColor="@color/white"
+            >
+    </androidx.appcompat.widget.Toolbar>
     <FrameLayout
             android:id="@+id/bottom_nav_frame"
             android:layout_width="match_parent"

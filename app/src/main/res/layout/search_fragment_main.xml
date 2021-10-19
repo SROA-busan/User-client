@@ -48,13 +48,16 @@
                     android:layout_marginTop="15dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/search_recycler_main"
-                android:src="@drawable/baseline_home_24"
-                android:visibility="gone"
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_recycler_main"
+                    android:src="@drawable/baseline_home_24"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </ScrollView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

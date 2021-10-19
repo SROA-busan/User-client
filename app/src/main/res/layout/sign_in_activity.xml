@@ -50,7 +50,8 @@
             app:layout_constraintTop_toBottomOf="@id/password"
             app:layout_constraintLeft_toLeftOf="@id/password"
             android:layout_marginTop="20dp"
-            android:text="자동로그인"/>
+            android:text="자동로그인"
+            android:id="@+id/appCompatCheckBox"/>
 
     <Button
             android:id="@+id/login_button"
@@ -67,6 +68,38 @@
             app:layout_constraintTop_toBottomOf="@+id/password"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintVertical_bias="0.0"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatCheckBox"
+            android:layout_marginTop="40dp"
+            android:id="@+id/view"/>
+
+    <Button
+            android:text="회원가입"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_up_button"
+            android:layout_marginTop="@dimen/login_margin"
+            android:textSize="@dimen/font_size"
+            android:background="@color/transparent"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+            android:text="아이디 / 비밀번호 조회"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size"
+            android:id="@+id/find_info_button"
+            android:background="@color/transparent"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_button"
+            app:layout_constraintStart_toStartOf="@+id/sign_up_button"
+            android:layout_marginTop="@dimen/login_margin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

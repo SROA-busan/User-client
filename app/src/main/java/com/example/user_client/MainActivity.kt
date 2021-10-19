@@ -2,6 +2,9 @@ package com.example.user_client
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.user_client.databinding.MainActivityBinding
@@ -22,10 +25,32 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
+        setActionBar()
         replaceFragment(MainFragment())
         setNavFragment()
     }
+    //툴바 설정
+    private fun setActionBar(){
+        val toolbar = view.mainToolBar
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
 
+        actionBar!!.setDisplayHomeAsUpEnabled(true) //왼쪽버튼 사용여부
+        actionBar!!.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24) //왼쪽버튼 이미지 설정
+    }
+    //툴바 이름변경
+    fun setTitle(title: String){
+        view.mainToolBar.title = title
+    }
+    //툴바 메뉴버튼 설정
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_toolbar_menu, menu) //main_toolbar_menu를 toolbar메뉴버튼으로 설정
+        return true
+    }
+    //툴바 메뉴 이벤트
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
     //하단 네비
     private fun setNavFragment() {
         view.bottomNavigationView.setOnItemSelectedListener { item ->
