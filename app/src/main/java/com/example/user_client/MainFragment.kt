@@ -8,53 +8,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
-import com.example.user_client.R
 import com.example.user_client.databinding.NavFragmentMainBinding
 import com.example.user_client.viewPager.ViewPagerAdapter
 import java.util.*
 
 class MainFragment : Fragment() {
 
-    private var binding: NavFragmentMainBinding? = null
-    private val view get() = binding!!
-    var currentPage = 0
+    private var _binding: NavFragmentMainBinding? = null
+    private val binding get() = _binding!!
+    private var currentPage = 0
+    private val timer = Timer()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = NavFragmentMainBinding.inflate(inflater, container, false)
+        _binding = NavFragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //툴바 타이틀 설정
+        setTitle()
+        //뷰 페이저 설정
+        setViewPager(timer)
+    }
+    
+    //툴바 타이틀 설정
+    private fun setTitle(){
         val mMainactivity = activity as MainActivity
         mMainactivity.setTitle("홈")
-
-        view.viewPager.adapter = ViewPagerAdapter(this, 1)
-        view.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+    }
+    
+    //뷰 페이저 설정
+    private fun setViewPager(timer: Timer){
+        binding.viewPager.adapter = ViewPagerAdapter(this, 1)
+        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         //페이지 자동 전환
         val handler = Handler(Looper.getMainLooper())
         val update = Runnable {
-            view.viewPager.setCurrentItem(currentPage++, true)
+            binding.viewPager.setCurrentItem(currentPage++, true)
         }
-        val timer = Timer()
+
         timer.schedule(object : TimerTask(){
             override fun run() {
                 handler.post(update)
             }
-
-        }, 500, 3000)
-        return view.root
+        }, 0, 3000)
     }
 
-//    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-//        override fun getItemCount(): Int = 2
-//
-//        override fun createFragment(position: Int): Fragment {
-//            var returnFrag = Fragment()
-//
-//            when (position) {
-//                0 -> returnFrag = SlideFragmentFirst()
-//                1 -> returnFrag = SlideFragmentSecond()
-//            }
-//            return returnFrag
-//        }
-//    }
+    override fun onPause() {
+        super.onPause()
+
+        timer.cancel()
+        timer.purge()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

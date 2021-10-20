@@ -11,13 +11,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.UserClient">
-        <activity android:name=".login.FindSignInfoActivity">
+        <activity android:name=".SearchDetailActivity">
         </activity>
-        <activity android:name=".login.SignUpActivity">
+        <activity android:name=".sign.FindSignInfoActivity">
         </activity>
-        <activity android:name=".search.SearchCurrent">
+        <activity android:name=".sign.SignUpActivity">
         </activity>
-        <activity android:name=".search.SearchPrevious">
+        <activity android:name=".search.SearchCurrentActivity">
+        </activity>
+        <activity android:name=".search.SearchPreviousActivity">
         </activity>
         <activity
                 android:name=".SplashActivity"
@@ -30,7 +32,7 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".login.SignInActivity">
+        <activity android:name=".sign.SignInActivity">
         </activity>
     </application>
 

@@ -13,58 +13,74 @@ import com.example.user_client.databinding.SearchFragmentMainBinding
 import com.example.user_client.dto.SearchData
 
 class SearchFragment : Fragment() {
-    companion object{
+    companion object {
         val dataset = ArrayList<SearchData>()
     }
-    private var binding : SearchFragmentMainBinding? = null
-    private val view get() = binding!!
+
+    private var _binding: SearchFragmentMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SearchFragmentMainBinding.inflate(inflater, container, false)
-        //툴바 타이틀 설정
-        val mMainactivity = activity as MainActivity
-        mMainactivity.setTitle("조회")
+        _binding = SearchFragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        //recyclerView 호출
-        val mRecyclerView = view.searchRecyclerMain
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setTitle("조회")
+        //버튼 이벤트 설정
+        setButtonEvent()
+        //recyclerView 설정
+        setRecyclerView()
+    }
+
+    //툴바 타이틀 설정
+    fun setTitle(title: String) {
+        val mMainactivity = activity as MainActivity
+        mMainactivity.setTitle(title)
+    }
+
+    //recyclerView 호출
+    fun setRecyclerView() {
+        val mRecyclerView = binding.searchRecyclerMain
         val mSearchMain = SearchData()
         dataset.add(mSearchMain)
         //어댑터 설정
         mRecyclerView.adapter = SearchAdapter(dataset)
         //layoutManager 설정
-        mRecyclerView.layoutManager = LinearLayoutManager(container!!.context)
+        mRecyclerView.layoutManager = LinearLayoutManager(context)
+    }
 
+    fun setButtonEvent(){
         //예약현황 버튼
-        view.reserveMain.setOnClickListener{
+        binding.reserveMain.setOnClickListener {
             //내역
-            if(view.searchRecyclerMain.isVisible){
-                view.searchRecyclerMain.visibility = View.GONE
+            if (binding.searchRecyclerMain.isVisible) {
+                binding.searchRecyclerMain.visibility = View.GONE
                 //버튼 화살표 애니메이션
-                view.arrow.animate().rotation(0f)
-            }
-            else{
-                view.searchRecyclerMain.visibility = View.VISIBLE
-                view.arrow.animate().rotation(90f)
+                binding.arrow.animate().rotation(0f)
+            } else {
+                binding.searchRecyclerMain.visibility = View.VISIBLE
+                binding.arrow.animate().rotation(90f)
             }
         }
         //수리현황 메뉴
-        view.reserveCurrent.setOnClickListener {
-            startActivity(Intent(context, SearchCurrent::class.java))
+        binding.reserveCurrent.setOnClickListener {
+            startActivity(Intent(context, SearchCurrentActivity::class.java))
         }
         //이전수리 메뉴
-        view.reservePrevious.setOnClickListener {
-            startActivity(Intent(context, SearchPrevious::class.java))
+        binding.reservePrevious.setOnClickListener {
+            startActivity(Intent(context, SearchPreviousActivity::class.java))
         }
-
-        return view.root
     }
 
     override fun onDestroyView() {
-        binding = null
+        _binding = null
         super.onDestroyView()
     }
 }

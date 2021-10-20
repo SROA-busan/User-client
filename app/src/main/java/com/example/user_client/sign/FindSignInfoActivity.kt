@@ -1,4 +1,4 @@
-package com.example.user_client.login
+package com.example.user_client.sign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

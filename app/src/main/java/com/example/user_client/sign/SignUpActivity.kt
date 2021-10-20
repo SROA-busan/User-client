@@ -1,10 +1,9 @@
-package com.example.user_client.login
+package com.example.user_client.sign
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.user_client.R
 import com.example.user_client.databinding.SignUpActivityBinding
 
 class SignUpActivity : AppCompatActivity() {

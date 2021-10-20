@@ -8,7 +8,7 @@ import com.example.user_client.R
 import com.example.user_client.databinding.SearchActivityPreviousBinding
 import com.example.user_client.dto.SearchData
 
-class SearchPrevious : AppCompatActivity() {
+class SearchPreviousActivity : AppCompatActivity() {
     companion object{
         val dataset = ArrayList<SearchData>()
     }

@@ -1,18 +1,32 @@
 package com.example.user_client.search
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user_client.R
+import com.example.user_client.SearchDetailActivity
 import com.example.user_client.dto.SearchData
+import kotlin.coroutines.coroutineContext
 
 
 class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.Adapter<SearchCurrentAdapter.SearchMainViewHolder>() {
 
-    inner class SearchMainViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    interface OnItemClickListener{
+        fun onItemClick(view: View, position: Int)
+    }
+    private lateinit var mOnItemClickListener: OnItemClickListener
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+        mOnItemClickListener = onItemClickListener
+    }
+
+    inner class SearchMainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val dateTime = view.findViewById<TextView>(R.id.search_datetime)
         val product = view.findViewById<TextView>(R.id.search_product)
         val textArea = view.findViewById<TextView>(R.id.search_textarea)
@@ -21,10 +35,9 @@ class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : Recycle
 
         init {
             view.setOnClickListener {
-                var pos = adapterPosition
-                if(pos != RecyclerView.NO_POSITION){
-                    val mSearchdata = dataset[pos]
-                    //TODO reserve_fragment_confirm 으로 데이터 전송 및 이동
+                val pos = adapterPosition
+                if(pos != null && mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(view, pos)
                 }
             }
         }

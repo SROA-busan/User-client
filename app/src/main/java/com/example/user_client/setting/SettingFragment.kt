@@ -9,10 +9,20 @@ import com.example.user_client.MainActivity
 import com.example.user_client.R
 
 class SettingFragment: Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.nav_fragment_setting, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setTitle("설정")
+    }
+
+    fun setTitle(title: String){
         //툴바 타이틀 설정
         val mMainactivity = activity as MainActivity
-        mMainactivity.setTitle("설정")
-        return inflater.inflate(R.layout.nav_fragment_setting, container, false)
+        mMainactivity.setTitle(title)
     }
 }
