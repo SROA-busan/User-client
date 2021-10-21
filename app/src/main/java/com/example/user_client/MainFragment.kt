@@ -1,36 +1,72 @@
 package com.example.user_client
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.user_client.R
+import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2
 import com.example.user_client.databinding.NavFragmentMainBinding
+import com.example.user_client.viewPager.ViewPagerAdapter
+import java.util.*
 
 class MainFragment : Fragment() {
-    private var binding: NavFragmentMainBinding? = null
-    private val view get() = binding!!
+
+    private var _binding: NavFragmentMainBinding? = null
+    private val binding get() = _binding!!
+    private var currentPage = 0
+    private val timer = Timer()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.v("ReserveFragment", "yes")
-        binding = NavFragmentMainBinding.inflate(inflater, container, false)
-//        view.viewpager.adapter = ViewPagerAdapter(this)
-        return view.root
+        _binding = NavFragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-//    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-//        override fun getItemCount(): Int = 2
-//
-//        override fun createFragment(position: Int): Fragment {
-//            var returnFrag = Fragment()
-//
-//            when (position) {
-//                0 -> returnFrag = SlideFragmentFirst()
-//                1 -> returnFrag = SlideFragmentSecond()
-//            }
-//            return returnFrag
-//        }
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //툴바 타이틀 설정
+        setTitle()
+        //뷰 페이저 설정
+        setViewPager(timer)
+    }
+    
+    //툴바 타이틀 설정
+    private fun setTitle(){
+        val mMainactivity = activity as MainActivity
+        mMainactivity.setTitle("홈")
+    }
+    
+    //뷰 페이저 설정
+    private fun setViewPager(timer: Timer){
+        binding.viewPager.adapter = ViewPagerAdapter(this, 1)
+        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        //페이지 자동 전환
+        val handler = Handler(Looper.getMainLooper())
+        val update = Runnable {
+            binding.viewPager.setCurrentItem(currentPage++, true)
+        }
+
+        timer.schedule(object : TimerTask(){
+            override fun run() {
+                handler.post(update)
+            }
+        }, 0, 3000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        timer.cancel()
+        timer.purge()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

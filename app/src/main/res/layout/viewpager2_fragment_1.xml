@@ -12,23 +12,27 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="@dimen/frame_size"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/pageMarginAndOffset"
+            android:layout_marginStart="@dimen/pageMarginAndOffset"
+            android:layout_marginRight="@dimen/pageMarginAndOffset"
+            android:layout_marginEnd="@dimen/pageMarginAndOffset"
+            >
 
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/skyblue"
                 android:id="@+id/imageView"
-                tools:ignore="VectorDrawableCompat"
-                />
+                tools:ignore="VectorDrawableCompat"/>
 
         <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="hello page 1"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

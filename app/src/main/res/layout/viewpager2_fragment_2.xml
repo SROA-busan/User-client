@@ -12,6 +12,10 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="@dimen/frame_size"
+            android:layout_marginLeft="@dimen/pageMarginAndOffset"
+            android:layout_marginStart="@dimen/pageMarginAndOffset"
+            android:layout_marginRight="@dimen/pageMarginAndOffset"
+            android:layout_marginEnd="@dimen/pageMarginAndOffset"
             android:orientation="vertical">
 
 
