@@ -1,18 +1,13 @@
 package com.example.user_client.search
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user_client.R
-import com.example.user_client.SearchDetailActivity
 import com.example.user_client.dto.SearchData
-import kotlin.coroutines.coroutineContext
 
 
 class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.Adapter<SearchCurrentAdapter.SearchMainViewHolder>() {

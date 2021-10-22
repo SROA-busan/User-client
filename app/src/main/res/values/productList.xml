@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="productList">
+        <item>냉장고</item>
+        <item>세탁기</item>
+        <item>스타일러</item>
+    </string-array>
+</resources>

@@ -1,11 +1,13 @@
-package com.example.user_client
+package com.example.user_client.search
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.user_client.databinding.SearchActivityDetailBinding
 import com.example.user_client.dto.SearchData
+import com.google.gson.Gson
 
 class SearchDetailActivity : AppCompatActivity() {
     private lateinit var binding: SearchActivityDetailBinding
@@ -15,8 +17,12 @@ class SearchDetailActivity : AppCompatActivity() {
         binding = SearchActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        //TODO 직렬화되서 넘어온 데이터 출력하기
-//        val intent = Intent().getSerializableExtra("reserveData")
-        Log.d("제목 : intent데이터 테스트", intent.toString())
+        //인텐트 호출
+        val intent = getIntent()
+        var searchData = intent.getSerializableExtra("reserveData")
+
+        if(searchData == null){
+            searchData = SearchData()
+        }
     }
 }

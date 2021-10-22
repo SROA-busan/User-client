@@ -1,16 +1,12 @@
 package com.example.user_client.dto
 
-import android.widget.ImageButton
 import com.example.user_client.R
 import java.io.Serializable
-import java.util.*
 
 data class SearchData(
     val dateTime: String = "0",
-    val product: String = "펭귄",
-    val textArea: String = "테스트",
-    val process: String = "진행중?",
+    val product: String = "0",
+    val textArea: String = "000",
+    val process: String = "0000?",
     val imageButtonColor: Int = R.color.fuckingblue
-) : Serializable{
-
-}
+): Serializable

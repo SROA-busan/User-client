@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.user_client.R
-import com.example.user_client.SearchDetailActivity
 import com.example.user_client.databinding.SearchActivityCurrentBinding
 import com.example.user_client.dto.SearchData
+import com.google.gson.Gson
 
 class SearchCurrentActivity : AppCompatActivity() {
     companion object{
@@ -37,10 +36,10 @@ class SearchCurrentActivity : AppCompatActivity() {
         adapter.setOnItemClickListener(object: SearchCurrentAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 intent.putExtra("reserveData", dataset.get(position))
-                Log.d("제목 : 넘어오기전 데이터 -", dataset.get(position).toString())
                 startActivity(intent)
             }
         })
+
         mRecyclerView.adapter = adapter
         mRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
     }

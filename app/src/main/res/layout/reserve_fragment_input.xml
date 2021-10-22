@@ -23,7 +23,7 @@
                 android:layout_marginTop="@dimen/pageMarginAndOffset">
 
             <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/reserve_id"
+                    android:id="@+id/reserve_name"
                     android:layout_width="@dimen/image_person"
                     android:layout_height="@dimen/image_person"
                     android:src="@drawable/baseline_person_24"
@@ -31,7 +31,7 @@
                     android:layout_marginRight="3dp"/>
 
             <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/reserve_input_id"
+                    android:id="@+id/reserve_input_name"
                     android:layout_width="@dimen/reserve_info_edit"
                     android:layout_height="@dimen/image_person"
                     android:lines="1"
@@ -91,8 +91,8 @@
                     android:layout_width="@dimen/reserve_info_edit"
                     android:layout_height="@dimen/image_person"
                     android:lines="1"
-                    android:hint="비상연락망"
-                    android:inputType="text"/>
+                    android:inputType="phone"
+                    android:hint="비상연락망"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatSpinner
@@ -117,7 +117,7 @@
                 android:scrollHorizontally="false"
                 android:minWidth="10dip"
                 android:maxWidth="5dip"
-                android:id="@+id/textArea"/>
+                android:id="@+id/reserve_product_info"/>
 
         <Button
                 android:id="@+id/reserve_button_next"
