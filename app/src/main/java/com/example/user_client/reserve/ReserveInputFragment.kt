@@ -45,6 +45,7 @@ class ReserveInputFragment : Fragment() {
         val mainActivityView = activity as MainActivity
 
         binding.reserveButtonNext.setOnClickListener {
+            setReserveData()
             //Fragment간 화면전환이 필요한 경우 속해있는 FragmentActivity의 FragmentManager을 통해 전환해줘야 한다.
             mainActivityView.changeReserveFragment("select")
         }
