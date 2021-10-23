@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.user_client.Retrofit.RetrofitBuilder
 import com.example.user_client.databinding.SignUpActivityBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(view.root)
 
         view.signUpConfirmButton.setOnClickListener {
+
             Toast.makeText(applicationContext, "회원가입이 완료됬습니다.", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, SignInActivity::class.java))
         }

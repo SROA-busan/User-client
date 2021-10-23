@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".sign.SignUpActivity">
+        tools:context=".sign.SignUpActivity" android:layout_marginTop="10dp">
+
 
     <TextView
             android:text="아이디"
@@ -17,7 +18,7 @@
             android:layout_marginLeft="@dimen/login_side_margin"
             android:layout_marginStart="@dimen/login_side_margin"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/sign_up_top_margin"/>
+            android:layout_marginTop="10dp"/>
 
     <EditText
             android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
             android:id="@+id/edit_user_id"
             app:layout_constraintStart_toEndOf="@+id/user_id"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/sign_up_top_margin"/>
+            android:layout_marginTop="10dp"/>
 
     <TextView
             android:text="비밀번호"
@@ -38,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/login_side_margin"
             android:layout_marginStart="@dimen/login_side_margin"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_id"/>
 
     <EditText
@@ -48,7 +49,7 @@
             android:ems="10"
             android:id="@+id/edit_user_pw"
             app:layout_constraintStart_toEndOf="@+id/user_pw"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_id"/>
 
     <TextView
@@ -60,7 +61,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/login_side_margin"
             android:layout_marginStart="@dimen/login_side_margin"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_pw"/>
 
     <EditText
@@ -70,7 +71,7 @@
             android:ems="10"
             android:id="@+id/edit_user_name"
             app:layout_constraintStart_toEndOf="@+id/user_name"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_pw"/>
 
     <TextView
@@ -82,7 +83,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/login_side_margin"
             android:layout_marginStart="@dimen/login_side_margin"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_name"/>
 
     <EditText
@@ -92,7 +93,7 @@
             android:ems="10"
             android:id="@+id/edit_user_address"
             app:layout_constraintStart_toEndOf="@+id/user_address"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_name"/>
 
     <TextView
@@ -104,7 +105,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="@dimen/login_side_margin"
             android:layout_marginStart="@dimen/login_side_margin"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_address"/>
 
     <EditText
@@ -114,7 +115,7 @@
             android:ems="10"
             android:id="@+id/edit_user_phone"
             app:layout_constraintStart_toEndOf="@+id/user_phone"
-            android:layout_marginTop="@dimen/sign_up_top_margin"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/user_address"/>
 
     <Button
@@ -125,6 +126,5 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_user_phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="24dp"/>
-
+            app:layout_constraintHorizontal_bias="0.529" android:layout_marginTop="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
