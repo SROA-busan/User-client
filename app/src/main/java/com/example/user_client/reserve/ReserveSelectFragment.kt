@@ -5,10 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentReserveBinding
+import com.example.user_client.viewModel.ReserveViewModel
 
 class ReserveSelectFragment :Fragment(){
     private var _binding: ReserveFragmentReserveBinding? = null

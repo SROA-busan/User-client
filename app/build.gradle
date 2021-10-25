@@ -6,10 +6,11 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
 
 
     defaultConfig {
+
+
         applicationId "com.example.user_client"
         minSdkVersion 16
         targetSdkVersion 30
@@ -39,7 +40,6 @@ android {
 }
 
 dependencies {
-    def lifecycle_version = "2.4.0-rc01"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -61,8 +61,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 //    okhttp3
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    def activity_version = "1.1.0"
+    implementation "androidx.activity:activity-ktx:$activity_version"
+
+
 }
