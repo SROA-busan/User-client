@@ -4,6 +4,9 @@
         <variable
                 name="searchData"
                 type="com.example.user_client.dto.SearchData"/>
+        <variable
+                name="userInfo"
+                type="com.example.user_client.dto.UserInfo"/>
     </data>
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -19,7 +22,8 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:text="test"
+                    android:text="@{userInfo.name}"
+                    android:hint="이름"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/search_detail_product"
@@ -30,7 +34,8 @@
                     android:textColor="#000000"/>
 
             <TextView
-                    android:text="냉장고가 시원해요 \n이거 맞아요? \n 배고프다 유가네 가고싶다 \n 아침먹고올껄 \n 5줄"
+                    android:text="@{searchData.productInfo}"
+                    android:hint="제품 상세내용"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/pageMargin"
@@ -43,7 +48,8 @@
                     android:id="@+id/search_detail_textArea"/>
 
             <TextView
-                    android:text="문의일시 : 2021년 10월 12일 오전 10:30 ~ 11:30"
+                    android:text="@{searchData.dateTime}"
+                    android:hint="문의일시 : 2021년 10월 12일 오전 10:30 ~ 11:30"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/pageMargin"
@@ -86,7 +92,8 @@
                     android:textSize="18sp"/>
 
             <TextView
-                    android:text="부산 남구 대연동 635-31 506호\n(도로명)부산 남구 유엔평화로 29번길 99 506호"
+                    android:text="@{userInfo.address}"
+                    android:hint="주소"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/pageMargin"

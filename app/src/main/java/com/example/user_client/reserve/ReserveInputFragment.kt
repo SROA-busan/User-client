@@ -23,19 +23,17 @@ class ReserveInputFragment : Fragment() {
     //inflate만
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ReserveFragmentInputBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
-
-        //뷰모델 설정
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
         return binding.root
     }
 
     //실질적 구현
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //뷰모델 설정
+        viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        
         setTitle("예약")
         setSpinner()
         setButtonEvent()
@@ -77,7 +75,7 @@ class ReserveInputFragment : Fragment() {
 //        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
 //        binding.reserveProduct.adapter = adapter
     }
-
+    //livedata설정
     fun setReserveData(){
         viewModel.name.value = binding.reserveInputName.text.toString()
         viewModel.address.value = binding.reserveInputAddress.text.toString()

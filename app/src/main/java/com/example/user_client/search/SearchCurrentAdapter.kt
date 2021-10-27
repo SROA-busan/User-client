@@ -1,5 +1,6 @@
 package com.example.user_client.search
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user_client.R
 import com.example.user_client.dto.SearchData
+import kotlin.coroutines.coroutineContext
 
 
 class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.Adapter<SearchCurrentAdapter.SearchMainViewHolder>() {
-
+    //커스텀 리스너
     interface OnItemClickListener{
         fun onItemClick(view: View, position: Int)
     }
+    //객체 저장 변수
     private lateinit var mOnItemClickListener: OnItemClickListener
 
+    //객체 전달변수
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
         mOnItemClickListener = onItemClickListener
     }
@@ -26,12 +30,12 @@ class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : Recycle
         val product = view.findViewById<TextView>(R.id.search_product)
         val textArea = view.findViewById<TextView>(R.id.search_textarea)
         val process = view.findViewById<TextView>(R.id.search_process)
-        val imageButton = view.findViewById<ImageButton>(R.id.search_imageButton)
 
         init {
             view.setOnClickListener {
                 val pos = adapterPosition
-                if(pos != null && mOnItemClickListener != null) {
+
+                if(pos != RecyclerView.NO_POSITION && mOnItemClickListener != null) {
                     mOnItemClickListener.onItemClick(view, pos)
                 }
             }
@@ -44,10 +48,17 @@ class SearchCurrentAdapter(private val dataset: ArrayList<SearchData>) : Recycle
     }
 
     override fun onBindViewHolder(holder: SearchMainViewHolder, position: Int) {
+        var process = dataset[position].process
         holder.dateTime.text = dataset[position].dateTime
         holder.product.text = dataset[position].product
-        holder.textArea.text = dataset[position].textArea
-        holder.process.text = dataset[position].process
+        holder.textArea.text = dataset[position].productInfo
+        holder.process.text = process
+        //진행상황별 라벨색 변경
+        when(process){
+            "진행중" -> holder.process.setBackgroundResource(R.drawable.label_blue)
+            "입고완료", "상세보기" -> holder.process.setBackgroundResource(R.drawable.label_green)
+            "예약대기" -> holder.process.setBackgroundResource(R.drawable.label_red)
+        }
     }
 
     override fun getItemCount(): Int = dataset.size

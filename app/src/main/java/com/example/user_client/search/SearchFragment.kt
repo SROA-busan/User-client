@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.user_client.MainActivity
+import com.example.user_client.R
 import com.example.user_client.databinding.SearchFragmentMainBinding
 import com.example.user_client.dto.SearchData
 
@@ -48,13 +49,35 @@ class SearchFragment : Fragment() {
     //recyclerView 호출
     fun setRecyclerView() {
         val mRecyclerView = binding.searchRecyclerMain
-        val mSearchMain = SearchData()
+
+        getSearchData()
+        val mSearchMain = SearchData(
+            "2021-10-27",
+            "바퀴벌레",
+            "바퀴벌레가 바퀴타고 굴러다니고있어요",
+            "예약대기",
+            R.color.진행중
+        )
         dataset.add(mSearchMain)
+
+        val intent = Intent(context, SearchDetailActivity::class.java)
+        val adapter = SearchAdapter(dataset)
+
+        adapter.setOnItemClickListener(object: SearchAdapter.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                intent.putExtra("searchData", dataset.get(position))
+                startActivity(intent)
+            }
+        })
+
         //어댑터 설정
-        mRecyclerView.adapter = SearchAdapter(dataset)
+        mRecyclerView.adapter = adapter
         //layoutManager 설정
         mRecyclerView.layoutManager = LinearLayoutManager(context)
     }
+
+    //TODO 서버에서 데이터 리스트 받아오기
+    fun getSearchData(){}
 
     fun setButtonEvent(){
         //예약현황 버튼

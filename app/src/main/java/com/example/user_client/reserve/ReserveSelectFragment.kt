@@ -23,17 +23,16 @@ class ReserveSelectFragment :Fragment(){
     //inflate
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ReserveFragmentReserveBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
         return binding.root
     }
 
     //init
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //뷰모델, 데이터 바인딩
+        viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         setButtonEvent()
     }
 

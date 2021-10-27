@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.user_client.dto.ReserveData
 
 class ReserveViewModel : ViewModel() {
-
     val name = MutableLiveData<String>()
     val emergencyCall = MutableLiveData<String>()
     val product = MutableLiveData<String>()
