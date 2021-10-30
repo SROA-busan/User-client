@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.user_client.MainActivity
 import com.example.user_client.databinding.SignInActivityBinding
 import com.example.user_client.network.RetrofitInstance
-import com.example.user_client.service.GetService
+import com.example.user_client.service.GetSignInService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,11 +21,14 @@ class SignInActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = SignInActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
+
+        val a = Intent().getSerializableExtra("test")
+        Log.d("제목", a.toString())
         
         binding.loginButton.setOnClickListener {
             Log.d("상태 : ", "클릭 됨")
             //API경로 인터페이스로 레트로핏 인스턴스 생성
-            val service = RetrofitInstance().getRetrofitInstance().create(GetService::class.java)
+            val service = RetrofitInstance().getSignInInstance()
             //api호출
             val call = service.login(binding.username.text.toString(), binding.password.text.toString())
             //콜백

@@ -14,7 +14,6 @@ import com.example.user_client.MapActivity
 import com.example.user_client.databinding.SignUpActivityBinding
 import com.example.user_client.dto.UserInfo
 import com.example.user_client.network.RetrofitInstance
-import com.example.user_client.service.GetService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,13 +45,11 @@ class SignUpActivity : AppCompatActivity() {
 
     //회원가입 서버 통신
     fun userSignUp() {
-        val service = RetrofitInstance().getRetrofitInstance().create(GetService::class.java)
+        val service = RetrofitInstance().getSignInInstance()
         val user = getUserInfo()
 
         if (checkUserInfo(user)) {
-            val call = service.userSignup(user)
-            call.enqueue(object : Callback<Boolean> {
-
+            service.userSignup(user).enqueue(object : Callback<Boolean> {
                 override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                     //회원가입
                     if (response.body().toString().toBoolean()) {

@@ -11,14 +11,15 @@ import android.util.Log
 import com.example.user_client.sign.SignInActivity
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.security.Signature
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_activity)
+
         Handler().postDelayed({
             val intent = Intent(this, SignInActivity::class.java)
+
             startActivity(intent)
             finish()
         }, 2000)
