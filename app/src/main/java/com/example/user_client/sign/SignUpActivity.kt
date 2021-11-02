@@ -1,5 +1,6 @@
 package com.example.user_client.sign
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,9 +15,11 @@ import com.example.user_client.MapActivity
 import com.example.user_client.databinding.SignUpActivityBinding
 import com.example.user_client.dto.UserInfo
 import com.example.user_client.network.RetrofitInstance
+import com.example.user_client.service.GetSignInService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
@@ -31,9 +34,14 @@ class SignUpActivity : AppCompatActivity() {
         view.editUserId.filters = arrayOf(inputFilter())
         //회원가입 버튼
         confirmButtonEvent()
+        view.editUserAddress.setOnClickListener {
+//            openMap()
+        }
     }
 
     fun openMap() {
+//        val service = RetrofitInstance().getMapInstance()
+//        service.getJuso(GetJusoService.KEY, Context.FILE_INTEGRITY_SERVICE, "1")
     }
 
     //회원가입 버튼

@@ -1,10 +1,12 @@
 package com.example.user_client.sign
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.databinding.SignInActivityBinding
 import com.example.user_client.network.RetrofitInstance
@@ -14,6 +16,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignInActivity : AppCompatActivity(){
+    companion object{
+        var id = ""
+    }
     private lateinit var binding: SignInActivityBinding
     private val view get() = binding!!
     
@@ -22,21 +27,33 @@ class SignInActivity : AppCompatActivity(){
         binding = SignInActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
-        val a = Intent().getSerializableExtra("test")
-        Log.d("제목", a.toString())
-        
-        binding.loginButton.setOnClickListener {
-            Log.d("상태 : ", "클릭 됨")
-            //API경로 인터페이스로 레트로핏 인스턴스 생성
-            val service = RetrofitInstance().getSignInInstance()
-            //api호출
-            val call = service.login(binding.username.text.toString(), binding.password.text.toString())
+        //로그인
+        binding.signInButton.setOnClickListener {
+            signIn()
+        }
+        //회원가입
+        binding.signUpButton.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+        }
+        //아이디/비밀번호 조회
+        binding.findInfoButton.setOnClickListener {
+            startActivity(Intent(this, FindSignInfoActivity::class.java))
+        }
+    }
+    
+    //로그인
+    fun signIn(){
+        //API경로 인터페이스로 레트로핏 인스턴스 생성
+        val service = RetrofitInstance().getSignInInstance()
+        //api호출
+        service.login(binding.username.text.toString(), binding.password.text.toString()).apply {
             //콜백
-            call.enqueue(object: Callback<Int> {    
+            enqueue(object: Callback<Int> {
                 //서버 로그인 리턴
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     //성공 0
                     if (response.body() == 0) {
+                        id = binding.username.text.toString()
                         Toast.makeText(applicationContext, "로그인이 완료됬습니다.", Toast.LENGTH_SHORT).show();
                         startActivity(Intent(applicationContext, MainActivity::class.java))
                     }
@@ -57,14 +74,6 @@ class SignInActivity : AppCompatActivity(){
                 }
 
             })
-        }
-
-        binding.signUpButton.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        }
-
-        binding.findInfoButton.setOnClickListener {
-            startActivity(Intent(this, FindSignInfoActivity::class.java))
         }
     }
 }

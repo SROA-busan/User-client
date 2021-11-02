@@ -32,6 +32,11 @@ class ReserveDetailFragment : Fragment(){
         setButtonEvent()
     }
 
+    //TODO 엔지니어 인포를 가져와야함
+    fun getEngineerInfo(){
+
+    }
+
     //버튼클릭 이벤트
     fun setButtonEvent(){
         binding.confirmButtonPrevious.setOnClickListener{

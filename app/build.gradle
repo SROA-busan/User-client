@@ -27,6 +27,9 @@ android {
         }
     }
     compileOptions {
+        //디슈가링 지원 허용
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -68,4 +71,8 @@ dependencies {
     // Cannot fit requested classes in a single dex file (# methods: 66105 > 65536) -> solution
     //라이브러리 추가로 인해 단일 dex파일 내에서 참조할 수 있는 총 갯수인 65536개보다 메서드가 더 많아졌기때문에 안된다고 지랄하는거다
     implementation 'androidx.multidex:multidex:2.0.1'
+    //자바 8+ API 사용을 위한 디슈가링지원
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    //캘린더 라이브러리
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
 }
