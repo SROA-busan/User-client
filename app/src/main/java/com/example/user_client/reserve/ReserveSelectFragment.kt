@@ -13,9 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentReserveBinding
+import com.example.user_client.network.RetrofitInstance
 import com.example.user_client.viewModel.ReserveViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class ReserveSelectFragment :Fragment(){
+class ReserveSelectFragment : Fragment() {
     private var _binding: ReserveFragmentReserveBinding? = null
     private lateinit var viewModel: ReserveViewModel
     private val binding get() = _binding!!
@@ -33,16 +37,35 @@ class ReserveSelectFragment :Fragment(){
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        //버튼 터치 이벤트
         setButtonEvent()
+
+    }
+
+    /* 고객 날짜 선택시 예약 가능 현황 조회
+    * [ 09:00 ,10:30, 12:30, 14:00, 15:30, 17:00] */
+    fun findAvailableTime(date: String, address: String) {
+        val getData = RetrofitInstance().getData()
+        getData.findAvailableTime(date, address).apply {
+            enqueue(object : Callback<List<Boolean>> {
+                override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
+                    //TODO 리턴값 뭐지?
+                }
+
+                override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
+
+                }
+            })
+        }
     }
 
     //버튼 이벤트 셋팅
-    fun setButtonEvent(){
+    fun setButtonEvent() {
         val mMainactivity = activity as MainActivity
-        binding.buttonNext.setOnClickListener{
+        binding.buttonNext.setOnClickListener {
             mMainactivity.changeReserveFragment("confirm")
         }
-        binding.buttonBefore.setOnClickListener{
+        binding.buttonBefore.setOnClickListener {
             mMainactivity.changeReserveFragment("input")
         }
     }

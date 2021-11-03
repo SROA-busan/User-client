@@ -3,56 +3,82 @@ package com.example.user_client.sign
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.InputFilter
 import android.text.Spanned
-import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import com.example.user_client.MapActivity
 import com.example.user_client.databinding.SignUpActivityBinding
 import com.example.user_client.dto.UserInfo
 import com.example.user_client.network.RetrofitInstance
-import com.example.user_client.service.GetService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
-    private var binding: SignUpActivityBinding? = null
-    private val view get() = binding!!
+    private var _binding: SignUpActivityBinding? = null
+    private val binding get() = _binding!!
+    private var isChecked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SignUpActivityBinding.inflate(layoutInflater)
-        setContentView(view.root)
+        _binding = SignUpActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        view.editUserId.filters = arrayOf(inputFilter())
+        binding.editUserId.filters = arrayOf(inputFilter())
+        //중복검사 버튼
+        binding.duplicateButton.setOnClickListener {
+            confirmDuplicate(binding.editUserId.text.toString())
+        }
+        //주소검색 버튼
+        binding.editUserAddress.setOnClickListener {
+//            openMap()
+        }
         //회원가입 버튼
-        confirmButtonEvent()
+        binding.signUpConfirmButton.setOnClickListener {
+            if(isChecked)
+                userSignUp()
+            else
+                Toast.makeText(applicationContext, "중복검사 해주세요", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun openMap() {
+//        val service = RetrofitInstance().getMapInstance()
+//        service.getJuso(GetJusoService.KEY, Context.FILE_INTEGRITY_SERVICE, "1")
     }
 
-    //회원가입 버튼
-    fun confirmButtonEvent() {
-        view.signUpConfirmButton.setOnClickListener {
-            userSignUp()
+    //유저아이디 중복검사
+    fun confirmDuplicate(checkId: String) {
+        val checkDuplicate = RetrofitInstance().getSignInInstance()
+        checkDuplicate.checkDuplicate(checkId).apply {
+            enqueue(object: Callback<Boolean>{
+                override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                    if (response.body()!!){
+                        Toast.makeText(applicationContext, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
+                        isChecked = true
+                    }
+
+                    else{
+                        Toast.makeText(applicationContext, "이미 존재하는 아이디 입니다.", Toast.LENGTH_SHORT).show()
+                        isChecked = false
+                    }
+                }
+
+                override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                    Log.d("결과 : ", "콜백 실패\n이유 : ${t}")
+                }
+            })
         }
     }
 
     //회원가입 서버 통신
     fun userSignUp() {
-        val service = RetrofitInstance().getRetrofitInstance().create(GetService::class.java)
+        val service = RetrofitInstance().getSignInInstance()
         val user = getUserInfo()
 
         if (checkUserInfo(user)) {
-            val call = service.userSignup(user)
-            call.enqueue(object : Callback<Boolean> {
-
+            service.userSignup(user).enqueue(object : Callback<Boolean> {
                 override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                     //회원가입
                     if (response.body().toString().toBoolean()) {
@@ -63,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<Boolean>, t: Throwable) {
-                    Log.d("콜백 : ", "통신 실패")
+                    Log.d("콜백 : ", "통신 실패\n이유 : "+t)
                 }
             })
         }
@@ -71,11 +97,11 @@ class SignUpActivity : AppCompatActivity() {
 
     //유저정보 반환
     fun getUserInfo(): UserInfo = UserInfo(
-        binding!!.editUserId.text.toString(),
-        binding!!.editUserPw.text.toString(),
-        binding!!.editUserName.text.toString(),
-        binding!!.editUserAddress.text.toString(),
-        binding!!.editUserPhone.text.toString(),
+        binding.editUserId.text.toString(),
+        binding.editUserPw.text.toString(),
+        binding.editUserName.text.toString(),
+        binding.editUserAddress.text.toString(),
+        binding.editUserPhone.text.toString(),
         1
     )
 

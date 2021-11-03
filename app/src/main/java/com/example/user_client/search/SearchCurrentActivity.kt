@@ -26,7 +26,7 @@ class SearchCurrentActivity : AppCompatActivity() {
 
     private fun setRecycler(){
         val mRecyclerView = binding.searchRecyclerCurrent
-        //TODO 서버에서 값 받아오기
+        //TODO 서버에서 기 예약된 정보 받아오기
         val mSearchData = SearchData(
             "2021-10-27",
             "바퀴벌레",

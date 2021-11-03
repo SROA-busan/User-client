@@ -13,7 +13,7 @@
         >
 
     <EditText
-            android:id="@+id/username"
+            android:id="@+id/userId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/login_side_margin"
@@ -40,7 +40,7 @@
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username"/>
+            app:layout_constraintTop_toBottomOf="@+id/userId"/>
 
     <androidx.appcompat.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:id="@+id/appCompatCheckBox"/>
 
     <Button
-            android:id="@+id/login_button"
+            android:id="@+id/signIn_button"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
