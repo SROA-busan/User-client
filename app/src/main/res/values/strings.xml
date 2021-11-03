@@ -15,7 +15,4 @@
     <string name="waiting_for_reservation">예약대기</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
-
-    <string name="BASE_URL">http://192.168.0.4:8001</string>
 </resources>

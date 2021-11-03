@@ -10,11 +10,14 @@ import retrofit2.create
 
 //레트로핏 인스턴스를 생성하는 클래스
 class RetrofitInstance {
+    companion object{
+        private val BASE_URL = "http://192.168.115.50:8000"
+    }
     //회원가입관련 레스토핏 인스턴스
     fun getSignInInstance(): GetSignInService{
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(R.string.BASE_URL.toString())
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GetSignInService::class.java)
@@ -24,7 +27,7 @@ class RetrofitInstance {
     fun getData(): GetDataService{
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(R.string.BASE_URL.toString())
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GetDataService::class.java)

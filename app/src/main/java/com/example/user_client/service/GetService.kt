@@ -13,10 +13,12 @@ interface GetSignInService {
     //로그인
     @GET("/account/login/{ID}/{PW}")
     fun login(@Path("ID") id: String, @Path("PW") pw: String): Call<Int>
-
     //회원가입
     @POST("/account/customer/singup")
     fun userSignup(@Body userInfo: UserInfo): Call<Boolean>
+    //아이디 중복검사
+    @GET("account/duplicateCheck/{ID}")
+    fun checkDuplicate(@Path("ID") id: String): Call<Boolean>
 }
 
 interface GetDataService {

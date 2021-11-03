@@ -30,6 +30,14 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/sign_up_top_margin"/>
 
+    <Button
+            android:text="중복검사"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/duplicate_button"
+            app:layout_constraintStart_toEndOf="@+id/edit_user_id"
+            app:layout_constraintTop_toTopOf="@+id/edit_user_id"/>
+
     <TextView
             android:text="비밀번호"
             android:layout_width="@dimen/title_width"

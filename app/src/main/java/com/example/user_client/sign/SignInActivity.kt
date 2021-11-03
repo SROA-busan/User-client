@@ -3,6 +3,8 @@ package com.example.user_client.sign
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.Spanned
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import com.example.user_client.service.GetSignInService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity(){
     companion object{
@@ -27,6 +30,10 @@ class SignInActivity : AppCompatActivity(){
         binding = SignInActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
+        //영문만 입력
+        //TODO backspace입력해도 메시지 뜸
+        binding.userId.filters = arrayOf(inputFilter())
+        
         //로그인
         binding.signInButton.setOnClickListener {
             signIn()
@@ -46,14 +53,14 @@ class SignInActivity : AppCompatActivity(){
         //API경로 인터페이스로 레트로핏 인스턴스 생성
         val service = RetrofitInstance().getSignInInstance()
         //api호출
-        service.login(binding.username.text.toString(), binding.password.text.toString()).apply {
+        service.login(binding.userId.text.toString(), binding.password.text.toString()).apply {
             //콜백
             enqueue(object: Callback<Int> {
                 //서버 로그인 리턴
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     //성공 0
                     if (response.body() == 0) {
-                        id = binding.username.text.toString()
+                        id = binding.userId.text.toString()
                         Toast.makeText(applicationContext, "로그인이 완료됬습니다.", Toast.LENGTH_SHORT).show();
                         startActivity(Intent(applicationContext, MainActivity::class.java))
                     }
@@ -69,11 +76,37 @@ class SignInActivity : AppCompatActivity(){
                 }
                 //실패시
                 override fun onFailure(call: Call<Int>, t: Throwable) {
-                    Log.d("상태 : ","콜백 실패")
+                    Log.d("상태 : ","콜백 실패\n이유 : ${t}")
                     Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show();
                 }
 
             })
+        }
+    }
+    // 영문만 허용
+    fun inputFilter() = object : InputFilter {
+        override fun filter(
+            source: CharSequence?,
+            start: Int,
+            end: Int,
+            dest: Spanned?,
+            dstart: Int,
+            dend: Int
+        ): CharSequence? {
+            /*
+            영문만 허용
+                "^[a-zA-Z]+\$"
+            영문만 허용(숫자 포함)
+                ^[a-zA-Z0-9]+$
+             */
+            val regex = "^[a-zA-Z]+\$"
+            val ps = Pattern.compile(regex)
+
+            if (!ps.matcher(source).matches()) {
+                Toast.makeText(applicationContext, "영어만 입력해주세요", Toast.LENGTH_SHORT).show()
+                return ""
+            }
+            return null
         }
     }
 }
