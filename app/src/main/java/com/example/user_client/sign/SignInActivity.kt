@@ -20,7 +20,7 @@ import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity(){
     companion object{
-        var id = ""
+        var userId = "" //Test
     }
     private lateinit var binding: SignInActivityBinding
     private val view get() = binding!!
@@ -36,7 +36,9 @@ class SignInActivity : AppCompatActivity(){
         
         //로그인
         binding.signInButton.setOnClickListener {
-            signIn()
+            userId = binding.password.text.toString()
+            signIn(userId, binding.password.text.toString())
+//            startActivity(Intent(this, MainActivity::class.java))
         }
         //회원가입
         binding.signUpButton.setOnClickListener {
@@ -49,18 +51,17 @@ class SignInActivity : AppCompatActivity(){
     }
     
     //로그인
-    fun signIn(){
+    fun signIn(id: String, pw: String){
         //API경로 인터페이스로 레트로핏 인스턴스 생성
         val service = RetrofitInstance().getSignInInstance()
         //api호출
-        service.login(binding.userId.text.toString(), binding.password.text.toString()).apply {
+        service.login(id, pw).apply {
             //콜백
             enqueue(object: Callback<Int> {
                 //서버 로그인 리턴
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     //성공 0
                     if (response.body() == 0) {
-                        id = binding.userId.text.toString()
                         Toast.makeText(applicationContext, "로그인이 완료됬습니다.", Toast.LENGTH_SHORT).show();
                         startActivity(Intent(applicationContext, MainActivity::class.java))
                     }

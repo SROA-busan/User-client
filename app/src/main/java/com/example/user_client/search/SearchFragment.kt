@@ -80,7 +80,7 @@ class SearchFragment : Fragment() {
     fun getSearchData(){}
 
     fun setButtonEvent(){
-        //예약현황 버튼
+        //예약현황 버튼 TODO 삭제예정
         binding.reserveMain.setOnClickListener {
             //내역
             if (binding.searchRecyclerMain.isVisible) {

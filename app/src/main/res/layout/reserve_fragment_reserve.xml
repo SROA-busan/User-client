@@ -40,7 +40,7 @@
 
                     <TextView
                             android:id="@+id/name"
-                            android:text="@{viewModel.name}"
+                            android:text="@{viewModel.customerName}"
                             android:textSize="29sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -48,14 +48,14 @@
 
                     <TextView
                             android:id="@+id/product"
-                            android:text="@{viewModel.product}"
+                            android:text="@{viewModel.classifyName}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             />
 
                     <TextView
                             android:id="@+id/phone"
-                            android:text="@{viewModel.emergencyCall}"
+                            android:text="@{viewModel.phoneNumber}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -93,7 +93,7 @@
                         android:gravity="center">
 
                     <Button
-                            android:text="Button"
+                            android:text="09 : 00"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
                             app:backgroundTint="#5C000000"/>
 
                     <Button
-                            android:text="Button"
+                            android:text="10 : 30"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
                             app:backgroundTint="#5C000000"/>
 
                     <Button
-                            android:text="Button"
+                            android:text="12 : 30"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
@@ -126,16 +126,16 @@
                         android:gravity="center">
 
                     <Button
-                            android:text="Button"
+                            android:text="14 : 00"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/button6"
+                            android:id="@+id/button4"
                             app:backgroundTint="#5C000000"/>
 
                     <Button
-                            android:text="Button"
+                            android:text="15 : 30"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
@@ -144,12 +144,12 @@
                             app:backgroundTint="#5C000000"/>
 
                     <Button
-                            android:text="Button"
+                            android:text="17 : 00"
                             android:layout_marginStart="@dimen/table_layout_margin"
                             android:layout_marginEnd="@dimen/table_layout_margin"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/button4"
+                            android:id="@+id/button6"
                             app:backgroundTint="#5C000000"/>
                 </TableRow>
             </TableLayout>

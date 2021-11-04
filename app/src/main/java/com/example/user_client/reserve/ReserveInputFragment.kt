@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentInputBinding
-import com.example.user_client.dto.ReserveData
 import com.example.user_client.dto.UserInfo
 import com.example.user_client.network.RetrofitInstance
 import com.example.user_client.sign.SignInActivity
@@ -37,10 +36,13 @@ class ReserveInputFragment : Fragment() {
     //실질적 구현
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //기 저장된 사용자의 정보 호출
+        Log.d("UserId : ", SignInActivity.userId)
+        getUserInfo(SignInActivity.userId)
         //뷰모델 설정
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setTitle("예약")
         setSpinner()
@@ -64,25 +66,28 @@ class ReserveInputFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
             binding.reserveProduct.adapter = adapter
         }
-        //리스트로 하는 방법
-//        val productList = arrayListOf<String>("냉장고", "스타일러")
-//        val adapter = ArrayAdapter(context!!, android.R.layout.simple_dropdown_item_1line, productList)
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-//        binding.reserveProduct.adapter = adapter
     }
 
     //id를 통해 서버에 저장된 이름, 주소, 비상연락망을 가져옴
-    fun getUserInfo() {
+    fun getUserInfo(userId: String) {
         val getDataService = RetrofitInstance().getData()
-        getDataService.getUserInfo(SignInActivity.id).apply {
-            enqueue(object: Callback<UserInfo> {
+
+        getDataService.getUserInfo(userId).apply {
+            enqueue(object : Callback<UserInfo> {
+
                 override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
-                    //TODO viewmodel에 이름, 주소, 비상연락망넣고 바인딩하기
+//                    Log.d("response.body : ", response.body().toString())
+                    if (response.body() != null) {
+                        response.body()!!.apply {
+                            viewModel.customerName.value = name
+                            viewModel.address.value = address
+                            viewModel.phoneNumber.value = phoneNum
+                        }
+                    }
                 }
 
                 override fun onFailure(call: Call<UserInfo>, t: Throwable) {
-                    Log.d("상태 : ","콜백 실패")
+                    Log.d("상태 : ", "콜백 실패")
                     Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show();
                 }
             })
@@ -103,11 +108,11 @@ class ReserveInputFragment : Fragment() {
 
     //livedata설정
     fun setReserveData() {
-        viewModel.name.value = binding.reserveInputName.text.toString()
+        viewModel.customerName.value = binding.reserveInputName.text.toString()
         viewModel.address.value = binding.reserveInputAddress.text.toString()
-        viewModel.emergencyCall.value = binding.reserveInputEmergency.text.toString()
-        viewModel.product.value = binding.reserveProduct.selectedItem.toString()
-        viewModel.productInfo.value = binding.reserveProductInfo.text.toString()
+        viewModel.phoneNumber.value = binding.reserveInputEmergency.text.toString()
+        viewModel.classifyName.value = binding.reserveProduct.selectedItem.toString()
+        viewModel.content.value = binding.reserveProductInfo.text.toString()
     }
 
     override fun onDestroyView() {

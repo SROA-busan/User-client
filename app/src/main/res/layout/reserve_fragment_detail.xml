@@ -20,7 +20,7 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:text="@{viewModel.name}"
+                    android:text="@{viewModel.customerName}"
                     android:hint="이름"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:textColor="#000000"/>
 
             <TextView
-                    android:text="@{viewModel.productInfo}"
+                    android:text="@{viewModel.classifyName}"
                     android:hint="제품 상세내용"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
