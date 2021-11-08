@@ -61,9 +61,9 @@ class SearchPreviousActivity : AppCompatActivity() {
         dataset.add(mSearchData)
 
         val intent = Intent(applicationContext, SearchDetailActivity::class.java)
-        val adapter = SearchPreviousAdapter(dataset)
+        val adapter = SearchAdapter(dataset)
         //아이템 클릭 이벤트 설정
-        adapter.setOnItemClickListener(object: SearchPreviousAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object: SearchAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 intent.putExtra("searchData", dataset.get(position))
                 startActivity(intent)

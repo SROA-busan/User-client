@@ -23,8 +23,8 @@ import java.time.LocalDate
 
 class ReserveSelectFragment : Fragment() {
     private var _binding: ReserveFragmentReserveBinding? = null
-    private lateinit var viewModel: ReserveViewModel
     private val binding get() = _binding!!
+    private lateinit var viewModel: ReserveViewModel
 
     //inflate
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +32,6 @@ class ReserveSelectFragment : Fragment() {
         return binding.root
     }
 
-    //init
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //뷰모델, 데이터 바인딩
@@ -40,7 +39,7 @@ class ReserveSelectFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        //고객 주소기반 이용가능한 시간 조회
+        //고객 주소기반 이용가능한 시간 조회(달력날짜 + 버튼에 적힌 시간, 고객 주소)
         findAvailableTime(LocalDate.now().toString(), viewModel.address.value!!)
         //버튼 터치 이벤트
         setButtonEvent()
@@ -48,31 +47,39 @@ class ReserveSelectFragment : Fragment() {
 
     /* 고객 날짜 선택시 예약 가능 현황 조회
     * [ 09:00 ,10:30, 12:30, 14:00, 15:30, 17:00] */
-    fun findAvailableTime(date: String, address: String) {
+    private fun findAvailableTime(date: String, address: String) {
+        //일정 예약 인스턴스 생성
         val getData = RetrofitInstance().getReservationSchedule()
-
-        getData.findAvailableTime(date, address).apply {
-            enqueue(object : Callback<List<Boolean>> {
-                override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
-                    val list : List<Boolean> = response.body()!!
-                    val buttonList: List<Button> = listOf(binding.button, binding.button2, binding.button3, binding.button4, binding.button5, binding.button6)
-                    //버튼별 활성 비활성화
-                    for ( i in list.indices){
-                        buttonList[i].isEnabled = list[i]
-                    }
+        //통신
+        getData.findAvailableTime(date, address).enqueue(object : Callback<List<Boolean>> {
+            override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
+                val list: List<Boolean> = response.body()!!
+                //활성 비활성 설정을 위한 버튼 리스트
+                val buttonList: List<Button> = listOf(
+                    binding.button,
+                    binding.button2,
+                    binding.button3,
+                    binding.button4,
+                    binding.button5,
+                    binding.button6
+                )
+                //버튼별 활성&비활성화
+                for (i in list.indices) {
+                    buttonList[i].isEnabled = list[i]
                 }
+            }
 
-                override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
-                    Log.d("통신실패 : ", ""+t)
-                }
-            })
-        }
+            override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
+                Log.e("통신실패 !! ", "에러명 ${t}")
+            }
+        })
+
     }
 
     //TODO 반납 예약
 
     //버튼 이벤트 셋팅
-    fun setButtonEvent() {
+    private fun setButtonEvent() {
         val mMainactivity = activity as MainActivity
         binding.buttonNext.setOnClickListener {
             mMainactivity.changeReserveFragment("confirm")

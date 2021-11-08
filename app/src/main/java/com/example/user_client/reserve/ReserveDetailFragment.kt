@@ -23,10 +23,10 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
-class ReserveDetailFragment : Fragment(){
-    private var _binding : ReserveFragmentDetailBinding? = null
-    private lateinit var viewModel : ReserveViewModel
+class ReserveDetailFragment : Fragment() {
+    private var _binding: ReserveFragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: ReserveViewModel
 
     //inflate
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,7 +34,6 @@ class ReserveDetailFragment : Fragment(){
         return binding.root
     }
 
-    //구현
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //뷰모델, 데이터 바인딩
@@ -46,9 +45,10 @@ class ReserveDetailFragment : Fragment(){
         //버튼 이벤트
         setButtonEvent()
     }
-    
+
     //예약푸싱
-    fun pushReserveData(){
+    private fun pushReserveData() {
+        //푸시할 데이터 설정
         val reserveData = ReserveData(
             SignInActivity.userId,          //아이디
             viewModel.customerName.value!!, //고객 이름
@@ -58,22 +58,24 @@ class ReserveDetailFragment : Fragment(){
             viewModel.phoneNumber.value!!,  //폰번호
             viewModel.content.value!!       //상세내용
         )
+        //일정 예약 인스턴스 호출
         val pushReserveSchdule = RetrofitInstance().getReservationSchedule()
         //예약정보 전송
-        pushReserveSchdule.pushReserveData(reserveData).enqueue(object: Callback<List<Any>>{
+        pushReserveSchdule.pushReserveData(reserveData).enqueue(object : Callback<List<Any>> {
             override fun onResponse(call: Call<List<Any>>, response: Response<List<Any>>) {
                 //TODO 엔지니어 인포를 가져와야함
-                Log.d("결과 : ", response.body().toString())
+//                Log.d("테스트", arrayListOf(response.body()!!.get(1)).get(2).toString())
+
             }
 
             override fun onFailure(call: Call<List<Any>>, t: Throwable) {
-                Log.d("결과 : ", "응답 실패")
+                Log.e("통신실패 !! ", "에러명 ${t}")
             }
         })
     }
 
     //버튼클릭 이벤트
-    fun setButtonEvent(){
+    private fun setButtonEvent() {
         //전화버튼
         binding.confirmButtonCall.setOnClickListener {
             //버튼 클릭시 전화번호 띄워주기기
@@ -81,7 +83,7 @@ class ReserveDetailFragment : Fragment(){
             startActivity(intent)
         }
         //이전 버튼
-        binding.confirmButtonPrevious.setOnClickListener{
+        binding.confirmButtonPrevious.setOnClickListener {
             val mMainActivity = activity as MainActivity
             mMainActivity.changeReserveFragment("select")
         }

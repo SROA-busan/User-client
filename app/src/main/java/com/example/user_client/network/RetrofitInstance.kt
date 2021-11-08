@@ -12,7 +12,8 @@ import retrofit2.create
 //레트로핏 인스턴스를 생성하는 클래스
 class RetrofitInstance {
     companion object{
-        private val BASE_URL = "http://192.168.14.10:"
+//        private val BASE_URL = "http://192.168.137.1:"
+        private val BASE_URL = "http://192.168.14.10:" //usb테더링 시
         private val inquerySchedule = "8000"
         private val signIn = "8001"
         private val reservationSchdule = "8002"
