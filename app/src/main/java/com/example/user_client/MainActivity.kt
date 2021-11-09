@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.user_client.databinding.MainActivityBinding
+import com.example.user_client.reserve.ReserveConfirmFragment
 import com.example.user_client.reserve.ReserveDetailFragment
 import com.example.user_client.reserve.ReserveInputFragment
 import com.example.user_client.reserve.ReserveSelectFragment
@@ -93,6 +94,9 @@ class MainActivity : AppCompatActivity() {
                 replaceFragment(ReserveSelectFragment())
             }
             "confirm" -> {
+                replaceFragment(ReserveConfirmFragment())
+            }
+            "detail" ->{
                 replaceFragment(ReserveDetailFragment())
             }
         }

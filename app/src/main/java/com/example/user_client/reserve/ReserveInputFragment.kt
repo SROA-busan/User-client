@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentInputBinding
-import com.example.user_client.dto.ReserveData
 import com.example.user_client.dto.UserInfo
 import com.example.user_client.network.RetrofitInstance
 import com.example.user_client.sign.SignInActivity
@@ -25,37 +23,39 @@ import retrofit2.Response
 class ReserveInputFragment : Fragment() {
     private var _binding: ReserveFragmentInputBinding? = null
     private lateinit var viewModel: ReserveViewModel
+    private val binding get() = _binding!!
 
-    val binding get() = _binding!!
-
-    //inflate만
+    //inflate
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ReserveFragmentInputBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    //실질적 구현
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //뷰모델 설정
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        setTitle("예약")
+        //타이틀 설정
+        setToolBarTitle("예약")
+        //스피너 설정
         setSpinner()
+        //저장된 사용자의 정보 호출(이름, 주소, 전화번호)
+        getUserInfo(SignInActivity.userId)
+        //버튼 이벤트 할당
         setButtonEvent()
     }
 
     //툴바 이름설정
-    fun setTitle(title: String) {
+    private fun setToolBarTitle(title: String) {
         val mMainactivity = activity as MainActivity
         mMainactivity.setTitle(title)
     }
 
     //스피너 설정
-    fun setSpinner() {
-        //리소스로 하는 방법
+    private fun setSpinner() {
         ArrayAdapter.createFromResource(
             context!!,
             R.array.productList,
@@ -64,37 +64,39 @@ class ReserveInputFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
             binding.reserveProduct.adapter = adapter
         }
-        //리스트로 하는 방법
-//        val productList = arrayListOf<String>("냉장고", "스타일러")
-//        val adapter = ArrayAdapter(context!!, android.R.layout.simple_dropdown_item_1line, productList)
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-//        binding.reserveProduct.adapter = adapter
     }
 
-    //id를 통해 서버에 저장된 이름, 주소, 비상연락망을 가져옴
-    fun getUserInfo() {
+    //저장된 사용자의 정보 호출(이름, 주소, 전화번호)
+    private fun getUserInfo(userId: String) {
+        //데이터 조회 인스턴스 생성
         val getDataService = RetrofitInstance().getData()
-        getDataService.getUserInfo(SignInActivity.id).apply {
-            enqueue(object: Callback<UserInfo> {
-                override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
-                    //TODO viewmodel에 이름, 주소, 비상연락망넣고 바인딩하기
+        //통신
+        getDataService.getUserInfo(userId).enqueue(object : Callback<UserInfo> {
+            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                if (response.body() != null) {
+                    //가져온 정보를 뷰모델에 할당
+                    response.body()!!.apply {
+                        viewModel.customerName.value = name
+                        viewModel.address.value = address
+                        viewModel.phoneNumber.value = phoneNum
+                    }
                 }
+            }
 
-                override fun onFailure(call: Call<UserInfo>, t: Throwable) {
-                    Log.d("상태 : ","콜백 실패")
-                    Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show();
-                }
-            })
-        }
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                Log.e("통신실패 !! ", "에러명 ${t}")
+            }
+        })
+
     }
 
     //버튼 이벤트
-    fun setButtonEvent() {
+    private fun setButtonEvent() {
         //상위 인스턴스로 초기화
         val mainActivityView = activity as MainActivity
 
         binding.reserveButtonNext.setOnClickListener {
+            //livedata설정
             setReserveData()
             //Fragment간 화면전환이 필요한 경우 속해있는 FragmentActivity의 FragmentManager을 통해 전환해줘야 한다.
             mainActivityView.changeReserveFragment("select")
@@ -102,12 +104,12 @@ class ReserveInputFragment : Fragment() {
     }
 
     //livedata설정
-    fun setReserveData() {
-        viewModel.name.value = binding.reserveInputName.text.toString()
+    private fun setReserveData() {
+        viewModel.customerName.value = binding.reserveInputName.text.toString()
         viewModel.address.value = binding.reserveInputAddress.text.toString()
-        viewModel.emergencyCall.value = binding.reserveInputEmergency.text.toString()
-        viewModel.product.value = binding.reserveProduct.selectedItem.toString()
-        viewModel.productInfo.value = binding.reserveProductInfo.text.toString()
+        viewModel.phoneNumber.value = binding.reserveInputEmergency.text.toString()
+        viewModel.classifyName.value = binding.reserveProduct.selectedItem.toString()
+        viewModel.content.value = binding.reserveProductInfo.text.toString()
     }
 
     override fun onDestroyView() {

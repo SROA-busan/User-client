@@ -107,7 +107,6 @@ class SignUpActivity : AppCompatActivity() {
 
     //유효성 검증
     fun checkUserInfo(userInfo: UserInfo): Boolean {
-        //TODO 아이디 중복검사
         if (userInfo.id.isEmpty()) {
             Toast.makeText(applicationContext, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
             return false

@@ -42,7 +42,7 @@
                         android:layout_width="@dimen/reserve_info_edit"
                         android:layout_height="@dimen/image_person"
                         android:lines="1"
-                        android:text="@{viewModel.name}"
+                        android:text="@{viewModel.customerName}"
                         android:inputType="text"
                         android:hint="이름"
                         />
@@ -99,7 +99,7 @@
                         android:id="@+id/reserve_input_emergency"
                         android:layout_width="@dimen/reserve_info_edit"
                         android:layout_height="@dimen/image_person"
-                        android:text="@{viewModel.emergencyCall}"
+                        android:text="@{viewModel.phoneNumber}"
                         android:lines="1"
                         android:inputType="phone"
                         android:hint="비상연락망"/>
@@ -122,7 +122,7 @@
                     app:layout_constraintTop_toBottomOf="@id/reserve_product"
                     android:layout_marginTop="@dimen/image_person_margin"
                     android:lines="5"
-                    android:text="@{viewModel.productInfo}"
+                    android:text="@{viewModel.content}"
                     android:gravity="top|left"
                     android:inputType="textMultiLine"
                     android:scrollHorizontally="false"

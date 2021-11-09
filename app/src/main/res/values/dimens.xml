@@ -16,6 +16,13 @@
     <dimen name="image_person">60dp</dimen>
     <dimen name="image_person_side_margin">20dp</dimen>
     <dimen name="image_person_top_margin">120dp</dimen>
+<!--    예약페이지-->
+    <dimen name="reserve_top_margin">30dp</dimen>
+    <dimen name="reserve_side_margin">24dp</dimen>
+    <dimen name="reserve_center_margin">20dp</dimen>
+    <dimen name="font_big">25sp</dimen>
+    <dimen name="font_nomal">22sp</dimen>
+    <dimen name="font_small">20sp</dimen>
 <!--    예약 선택 페이지-->
     <dimen name="table_layout_margin">5dp</dimen>
     <dimen name="recyclerTag">80dp</dimen>
