@@ -40,24 +40,27 @@ class ReserveDetailFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        //뒤로가기 이벤트
+        setBackPressed()
         //버튼 이벤트
         setButtonEvent()
     }
 
-
+    //뒤로가기 이벤트
+    private fun setBackPressed() {
+        val activity = activity as MainActivity
+        activity.setHomeEnabled(true)
+        activity.fragment = ReserveConfirmFragment()
+    }
 
     //버튼클릭 이벤트
     private fun setButtonEvent() {
         //전화버튼
         binding.confirmButtonCall.setOnClickListener {
             //버튼 클릭시 전화번호 띄워주기기
-            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "01040275019", null))
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", viewModel.engineerPhoneNumber.value, null))
             startActivity(intent)
-        }
-        //이전 버튼
-        binding.confirmButtonPrevious.setOnClickListener {
-            val mMainActivity = activity as MainActivity
-            mMainActivity.changeReserveFragment("select")
         }
     }
 

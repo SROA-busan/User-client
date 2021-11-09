@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
+import com.example.user_client.MainFragment
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentInputBinding
 import com.example.user_client.dto.UserInfo
@@ -37,7 +38,7 @@ class ReserveInputFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        
         //타이틀 설정
         setToolBarTitle("예약")
         //스피너 설정
@@ -46,13 +47,16 @@ class ReserveInputFragment : Fragment() {
         getUserInfo(SignInActivity.userId)
         //버튼 이벤트 할당
         setButtonEvent()
+        
     }
 
-    //툴바 이름설정
+    //툴바 설정
     private fun setToolBarTitle(title: String) {
         val mMainactivity = activity as MainActivity
+        mMainactivity.setHomeEnabled(false)
         mMainactivity.setTitle(title)
     }
+    
 
     //스피너 설정
     private fun setSpinner() {

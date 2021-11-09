@@ -38,6 +38,21 @@ class ReserveConfirmFragment: Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        //뒤로가기 이벤트
+        setBackPressed()
+        //버튼 이벤트
+        setButtonEvent()
+    }
+
+    //뒤로가기 이벤트
+    private fun setBackPressed(){
+        val activity = activity as MainActivity
+        activity.setHomeEnabled(true)
+        activity.fragment = ReserveSelectFragment()
+    }
+    //버튼 이벤트
+    private fun setButtonEvent(){
         binding.reserveConfirmButton.setOnClickListener {
             val mMainActivity = activity as MainActivity
             //예약 푸싱
@@ -64,7 +79,9 @@ class ReserveConfirmFragment: Fragment() {
         //예약정보 전송
         pushReserveSchdule.pushReserveData(reserveData).enqueue(object : Callback<List<String>> {
             override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
-                Log.d("내용 : ", response.body()!!.toString())
+                viewModel.engineerName.value = response.body()!!.get(0)         //엔지니어 이름
+                viewModel.serviceCenterName.value = response.body()!!.get(1)    //서비스 센터 이름
+                viewModel.engineerPhoneNumber.value = response.body()!!.get(2)  //엔지니어 전화번호
             }
 
             override fun onFailure(call: Call<List<String>>, t: Throwable) {

@@ -17,7 +17,7 @@ class RetrofitInstance {
     companion object{
 //        private val BASE_URL = "http://3.36.108.92:"
 //        private val BASE_URL = "http://192.168.162.242:"
-        private val BASE_URL = "http://192.168.162.193:"
+        private val BASE_URL = "http://192.168.0.4:"
         private val inquerySchedule = "8084"//8084
         private val signIn = "8081"
         private val reservationSchdule = "8002"

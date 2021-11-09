@@ -13,6 +13,7 @@ import com.example.user_client.reserve.ReserveSelectFragment
 import com.example.user_client.search.SearchFragment
 import com.example.user_client.setting.SettingFragment
 import java.lang.Exception
+import kotlin.concurrent.fixedRateTimer
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
 
-        actionBar!!.setDisplayHomeAsUpEnabled(true) //왼쪽버튼 사용여부
+        actionBar!!.setDisplayHomeAsUpEnabled(false) //왼쪽버튼 사용여부
         actionBar!!.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24) //왼쪽버튼 이미지 설정
     }
 
@@ -45,15 +46,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     //툴바 메뉴버튼 설정
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_toolbar_menu, menu) //main_toolbar_menu를 toolbar메뉴버튼으로 설정
-        return true
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.main_toolbar_menu, menu) //main_toolbar_menu를 toolbar메뉴버튼으로 설정
+//        return true
+//    }
+
+    fun setHomeEnabled(flag: Boolean){
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(flag) //왼쪽버튼 사용여부
     }
 
+
+    lateinit var fragment: Fragment
     //툴바 메뉴 이벤트
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item!!.itemId){
+            android.R.id.home -> {
+                if(fragment != null)
+                    replaceFragment(fragment)
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
+
 
     //하단 네비
     private fun setNavFragment() {
@@ -82,6 +97,10 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 
     //예약메뉴 이동관련

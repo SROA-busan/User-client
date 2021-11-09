@@ -47,12 +47,12 @@ class MainFragment : Fragment() {
         val currentMonth = YearMonth.now()                      //현재월
         val firstOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek //첫 주
 
-        setCalendarSchedule(currentMonth, firstOfWeek)
     }
 
     //툴바 타이틀 설정
     private fun setTitle() {
         val mMainactivity = activity as MainActivity
+        mMainactivity.setHomeEnabled(false)
         mMainactivity.setTitle("홈")
     }
 
@@ -67,47 +67,11 @@ class MainFragment : Fragment() {
             binding.viewPager.setCurrentItem(currentPage++, true)
         }
 
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(update)
-            }
-        }, 0, 3000)
-    }
-
-    //캘린더뷰 설정
-    fun setCalendarSchedule(currentMonth: YearMonth, firstOfWeek: DayOfWeek) {
-        //달력에 날짜 텍스트뷰 바인딩
-        binding.calendarView.dayBinder = object : DayBinder<DayViewContainer> {
-
-            override fun bind(container: DayViewContainer, day: CalendarDay) {
-                //날짜 바인드
-                container.textView.text = day.date.dayOfMonth.toString()
-                /*
-                * inDates have their owner property set to DayOwner.PREVIOUS_MONTH
-                * outDates have their owner property set to DayOwner.NEXT_MONTH
-                * monthDates have their owner property set to DayOwner.THIS_MONTH
-                */
-                //inDates
-                if (day.owner == DayOwner.THIS_MONTH) {
-                    container.textView.setTextColor(Color.GRAY) //회색
-                }
-                //outDates
-                else {
-                    container.textView.setTextColor(Color.TRANSPARENT) //투명
-                }
-            }
-
-            override fun create(view: View): DayViewContainer = DayViewContainer(view)
-        }
-        
-        binding.calendarView.apply {
-            //월 설정
-            setup(currentMonth.minusMonths(10), currentMonth.plusMonths(10), firstOfWeek)
-            //처음 표시할 월
-            scrollToMonth(currentMonth)
-            //스크롤 방식
-            scrollMode = ScrollMode.PAGED
-        }
+//        timer.schedule(object : TimerTask() {
+//            override fun run() {
+//                handler.post(update)
+//            }
+//        }, 0, 3000)
     }
 
     override fun onPause() {

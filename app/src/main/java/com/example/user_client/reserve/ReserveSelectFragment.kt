@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
+import com.example.user_client.MainFragment
 import com.example.user_client.R
 import com.example.user_client.databinding.ReserveFragmentReserveBinding
 import com.example.user_client.network.RetrofitInstance
@@ -43,8 +44,17 @@ class ReserveSelectFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        //뒤로가기 이벤트
+        setBackPressed()
         //달력 날짜변경 이벤트
         setCalendarEvent()
+    }
+
+    //뒤로가기 이벤트
+    private fun setBackPressed(){
+        val activity = activity as MainActivity
+        activity.setHomeEnabled(true)
+        activity.fragment = ReserveInputFragment()
     }
 
     fun setCalendarEvent(){
@@ -93,8 +103,6 @@ class ReserveSelectFragment : Fragment() {
             }
         })
     }
-
-    //TODO 반납 예약
 
     //버튼별 이벤트 설정
     private fun setButtons(date: String){

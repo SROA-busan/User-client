@@ -10,7 +10,7 @@ class ReserveViewModel : ViewModel() {
     val content = MutableLiveData<String>()      //상세내용
     val address = MutableLiveData<String>()      //주소
     val confirmDateTime = MutableLiveData<String>()//예약 확인한 날짜
-    val serviceCenterName = MutableLiveData<String>() //서비스 센터
-    val serviceCenterAdress = MutableLiveData<String>() //서비스 센터
-    val serviceCenter = MutableLiveData<String>() //서비스 센터
+    val serviceCenterName = MutableLiveData<String>() //서비스 센터이름
+    val engineerName = MutableLiveData<String>() //엔지니어 이름
+    val engineerPhoneNumber = MutableLiveData<String>() //엔지니어 전화번호
 }
