@@ -49,11 +49,11 @@ class SearchDetailActivity : AppCompatActivity() {
                 call: Call<CustomerReservationDetailInfo>,
                 response: Response<CustomerReservationDetailInfo>
             ) {
-                Log.d("상태 : ", response.body().toString())
+                Log.d("상세 상태 : ", response.body().toString())
             }
 
             override fun onFailure(call: Call<CustomerReservationDetailInfo>, t: Throwable) {
-                Log.d("상태 : ", "통신실패")
+                Log.e("상태 : ", "통신실패")
             }
         })
     }

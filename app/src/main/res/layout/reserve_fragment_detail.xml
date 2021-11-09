@@ -20,7 +20,7 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:text="@{viewModel.customerName}"
+                    android:text="예약이 완료되었습니다!!"
                     android:hint="이름"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,7 +33,15 @@
 
             <TextView
                     android:text="@{viewModel.classifyName}"
-                    android:hint="제품 상세내용"
+                    android:hint="서비스 명"
+                    android:layout_width="@dimen/layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/pageMargin"
+                    android:layout_marginStart="@dimen/pageMargin"
+                    android:id="@+id/classfiyName"/>
+            <TextView
+                    android:text="@{viewModel.content}"
+                    android:hint="서비스 상세내용"
                     android:layout_width="@dimen/layout_width"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/pageMargin"
@@ -46,7 +54,7 @@
                     android:id="@+id/textArea"/>
 
             <TextView
-                    android:text="문의일시 : 2021년 10월 12일 오전 10:30 ~ 11:30"
+                    android:text="@{viewModel.confirmDateTime}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/pageMargin"

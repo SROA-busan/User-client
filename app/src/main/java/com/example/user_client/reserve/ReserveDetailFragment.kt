@@ -40,39 +40,11 @@ class ReserveDetailFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        //예약정보 전송
-        pushReserveData()
         //버튼 이벤트
         setButtonEvent()
     }
 
-    //예약푸싱
-    private fun pushReserveData() {
-        //푸시할 데이터 설정
-        val reserveData = ReserveData(
-            SignInActivity.userId,          //아이디
-            viewModel.customerName.value!!, //고객 이름
-            viewModel.classifyName.value!!, //분류이름
-            viewModel.address.value!!,      //주소
-            LocalDateTime.now().toString().substring(0, 16).replace('T', ' '),     //예약날짜(버튼 누른날짜)
-            viewModel.phoneNumber.value!!,  //폰번호
-            viewModel.content.value!!       //상세내용
-        )
-        //일정 예약 인스턴스 호출
-        val pushReserveSchdule = RetrofitInstance().getReservationSchedule()
-        //예약정보 전송
-        pushReserveSchdule.pushReserveData(reserveData).enqueue(object : Callback<List<Any>> {
-            override fun onResponse(call: Call<List<Any>>, response: Response<List<Any>>) {
-                //TODO 엔지니어 인포를 가져와야함
-//                Log.d("테스트", arrayListOf(response.body()!!.get(1)).get(2).toString())
 
-            }
-
-            override fun onFailure(call: Call<List<Any>>, t: Throwable) {
-                Log.e("통신실패 !! ", "에러명 ${t}")
-            }
-        })
-    }
 
     //버튼클릭 이벤트
     private fun setButtonEvent() {

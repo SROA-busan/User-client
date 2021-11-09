@@ -43,7 +43,7 @@ class SearchPreviousActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<CustomerResesrvationInfo>>, t: Throwable) {
-                Log.d("통신실패 : ", "${t}")
+                Log.e("통신실패 : ", "${t}")
             }
         })
     }

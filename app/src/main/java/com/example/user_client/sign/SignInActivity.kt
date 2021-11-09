@@ -20,7 +20,8 @@ import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity(){
     companion object{
-        var userId = "" //Test
+        private lateinit var _UserId: String //Test
+        val userId get() = _UserId
     }
     private lateinit var binding: SignInActivityBinding
     private val view get() = binding!!
@@ -36,7 +37,7 @@ class SignInActivity : AppCompatActivity(){
         
         //로그인
         binding.signInButton.setOnClickListener {
-            userId = binding.password.text.toString()
+            _UserId = binding.userId.text.toString()
             signIn(userId, binding.password.text.toString())
 //            startActivity(Intent(this, MainActivity::class.java))
         }
@@ -54,6 +55,7 @@ class SignInActivity : AppCompatActivity(){
     fun signIn(id: String, pw: String){
         //API경로 인터페이스로 레트로핏 인스턴스 생성
         val service = RetrofitInstance().getSignInInstance()
+        Log.d("아이디 : ", id)
         //api호출
         service.login(id, pw).apply {
             //콜백

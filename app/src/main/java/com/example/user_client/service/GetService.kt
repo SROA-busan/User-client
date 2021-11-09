@@ -52,5 +52,5 @@ interface GetReservationSchedule{
 
     //예약정보 전송
     @POST("/schedule/allocateEngineer")
-    fun pushReserveData(@Body reserveData: ReserveData): Call<List<Any>>
+    fun pushReserveData(@Body reserveData: ReserveData): Call<List<String>>
 }
