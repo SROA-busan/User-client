@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
         //버튼 이벤트 설정
         setButtonEvent()
         //recyclerView 설정
-        setRecyclerView()
+//        setRecyclerView()
     }
 
     //툴바 타이틀 설정
@@ -46,52 +46,7 @@ class SearchFragment : Fragment() {
         mMainactivity.setTitle(title)
     }
 
-    //recyclerView 호출
-    fun setRecyclerView() {
-        val mRecyclerView = binding.searchRecyclerMain
-
-        getSearchData()
-        val mSearchMain = SearchData(
-            "2021-10-27",
-            "바퀴벌레",
-            "바퀴벌레가 바퀴타고 굴러다니고있어요",
-            "예약대기",
-            R.color.진행중
-        )
-        dataset.add(mSearchMain)
-
-        val intent = Intent(context, SearchDetailActivity::class.java)
-        val adapter = SearchAdapter(dataset)
-
-        adapter.setOnItemClickListener(object: SearchAdapter.OnItemClickListener{
-            override fun onItemClick(view: View, position: Int) {
-                intent.putExtra("searchData", dataset.get(position))
-                startActivity(intent)
-            }
-        })
-
-        //어댑터 설정
-        mRecyclerView.adapter = adapter
-        //layoutManager 설정
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
-    }
-
-    //TODO 서버에서 데이터 리스트 받아오기
-    fun getSearchData(){}
-
     fun setButtonEvent(){
-        //예약현황 버튼 TODO 삭제예정
-        binding.reserveMain.setOnClickListener {
-            //내역
-            if (binding.searchRecyclerMain.isVisible) {
-                binding.searchRecyclerMain.visibility = View.GONE
-                //버튼 화살표 애니메이션
-                binding.arrow.animate().rotation(0f)
-            } else {
-                binding.searchRecyclerMain.visibility = View.VISIBLE
-                binding.arrow.animate().rotation(90f)
-            }
-        }
         //수리현황 메뉴
         binding.reserveCurrent.setOnClickListener {
             startActivity(Intent(context, SearchCurrentActivity::class.java))

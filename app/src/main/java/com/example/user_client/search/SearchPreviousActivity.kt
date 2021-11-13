@@ -18,54 +18,56 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchPreviousActivity : AppCompatActivity() {
-    companion object{
-        val dataset = ArrayList<SearchData>()
-    }
-    private lateinit var binding : SearchActivityPreviousBinding
+    private val dataset = ArrayList<CustomerResesrvationInfo>()
+
+    private lateinit var binding: SearchActivityPreviousBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SearchActivityPreviousBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //이전 내역조회
         getPreviousRepairList()
-        setRecycler()
     }
-    //지난 예약 현황조회 flag = 1, 5
-    fun getPreviousRepairList(){
-        val previousRepairList = RetrofitInstance().getData()
-        previousRepairList.getLastRepairList(SignInActivity.userId).enqueue(object : Callback<List<CustomerResesrvationInfo>>{
-            override fun onResponse(
-                call: Call<List<CustomerResesrvationInfo>>,
-                response: Response<List<CustomerResesrvationInfo>>
-            ) {
-                Log.d("이전 상태 : ", response.body().toString())
-            }
 
-            override fun onFailure(call: Call<List<CustomerResesrvationInfo>>, t: Throwable) {
-                Log.e("통신실패 : ", "${t}")
-            }
-        })
+    //지난 예약 현황조회 flag = 1, 5
+    fun getPreviousRepairList() {
+        val previousRepairList = RetrofitInstance().getData()
+        previousRepairList.getLastRepairList(SignInActivity.userId)
+            .enqueue(object : Callback<List<CustomerResesrvationInfo>> {
+                override fun onResponse(
+                    call: Call<List<CustomerResesrvationInfo>>,
+                    response: Response<List<CustomerResesrvationInfo>>
+                ) {
+                    Log.d("지난 예약현황 조회 ", response.body().toString())
+                    if (response.body() != null) {
+                        response.body()!!.forEach {
+                            dataset.add(it)
+                        }
+                    }
+                    //데이터 셋팅
+                    //리사이클러뷰 호출
+                    setRecycler()
+                }
+
+                override fun onFailure(call: Call<List<CustomerResesrvationInfo>>, t: Throwable) {
+                    Log.e("통신실패 : ", "${t}")
+                }
+            })
     }
 
     //리사이클러뷰 셋팅
-    private fun setRecycler(){
+    private fun setRecycler() {
         val mRecyclerView = binding.searchRecyclerPrevious
-        val mSearchData = SearchData(
-            "2021-10-27",
-            "바퀴벌레",
-            "바퀴벌레가 바퀴타고 굴러다니고있어요",
-            "입고완료",
-            R.color.진행중
-        )
-        dataset.add(mSearchData)
-
+        //넘겨줄 페이지
         val intent = Intent(applicationContext, SearchDetailActivity::class.java)
         val adapter = SearchAdapter(dataset)
         //아이템 클릭 이벤트 설정
-        adapter.setOnItemClickListener(object: SearchAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-                intent.putExtra("searchData", dataset.get(position))
+                //넘겨줄 데이터
+                intent.putExtra("scheduleNum", dataset.get(position).scheduleNum)
                 startActivity(intent)
             }
         })

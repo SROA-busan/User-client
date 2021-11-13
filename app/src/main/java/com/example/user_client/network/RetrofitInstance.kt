@@ -1,26 +1,29 @@
 package com.example.user_client.network
 
-import com.example.user_client.R
-import com.example.user_client.service.GetDataService
+import com.example.user_client.service.GetInquiryService
 import com.example.user_client.service.GetReservationSchedule
 import com.example.user_client.service.GetSignInService
-import com.google.gson.Gson
+import com.example.user_client.service.PutEvaluation
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 //레트로핏 인스턴스를 생성하는 클래스
 class RetrofitInstance {
     companion object{
-//        private val BASE_URL = "http://3.36.108.92:"
-//        private val BASE_URL = "http://192.168.162.242:"
-        private val BASE_URL = "http://192.168.0.4:"
-        private val inquerySchedule = "8084"//8084
-        private val signIn = "8081"
-        private val reservationSchdule = "8002"
+//        private val BASE_URL = "http://3.36.122.237:"
+        private val BASE_URL = "http://192.168.162.193:"
+//        private val BASE_URL = "http://192.168.0.9:"
+        private val accountBASE_URL = "http://3.36.130.67:"
+        private val reserveBASE_URL = "http://13.125.161.56:"
+        private val inquiryBASE_URL = "http://3.34.140.158:"
+        private val evalutionBASE_URL = "http://52.78.98.197:"
+
+        private val ACCOUNT = "8081"
+        private val RESERVATION_SCHEDULE = "8083"
+        private val INQUERY_SCHEDULE = "8084"//8084
+        private val EVALUATION = "8085"
     }
 
     fun setOkHttp(): OkHttpClient{
@@ -34,44 +37,41 @@ class RetrofitInstance {
 
     //회원가입관련 레스토핏 인스턴스
     fun getSignInInstance(): GetSignInService{
-
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(BASE_URL+signIn)
+            .baseUrl(accountBASE_URL+ACCOUNT)
             .addConverterFactory(GsonConverterFactory.create())
             .client(setOkHttp())
             .build()
             .create(GetSignInService::class.java)
-
     }
-    //정보 로드관련 레트로핏 인스턴스
-    fun getData(): GetDataService{
-        return retrofit2.Retrofit
-            .Builder()
-            .baseUrl(BASE_URL+inquerySchedule)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(GetDataService::class.java)
-    }
-
     //예약정보 조회관련
     fun getReservationSchedule() : GetReservationSchedule {
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(BASE_URL+ reservationSchdule)
+            .baseUrl(reserveBASE_URL+ RESERVATION_SCHEDULE)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GetReservationSchedule::class.java)
     }
-    //주소검색 서비스
-//    fun getMapInstance(): GetJusoService{
-//        val retrofit = retrofit2.Retrofit
-//            .Builder()
-//            .baseUrl(GetJusoService.BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(GetJusoService::class.java)
-//
-//        return retrofit
-//    }
+    //정보 로드관련 레트로핏 인스턴스
+    fun getData(): GetInquiryService{
+        return retrofit2.Retrofit
+            .Builder()
+            .baseUrl(inquiryBASE_URL+INQUERY_SCHEDULE)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GetInquiryService::class.java)
+    }
+
+
+    //평가 입력
+    fun putEvaluation(): PutEvaluation{
+        return retrofit2.Retrofit
+            .Builder()
+            .baseUrl(evalutionBASE_URL + EVALUATION)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PutEvaluation::class.java)
+    }
 }

@@ -1,11 +1,12 @@
 package com.example.user_client.dto
 
+import java.io.Serializable
+
 data class CustomerResesrvationInfo(
-    val scheduleNum: Long,
-    val productName: String,
-    val startDate: String,
-    val endDate: String,
-    val content: String,
-//true : 수리, false : 반납
-    val flag: Int
+    val scheduleNum: Long,  //일정 번호
+    val productName: String,//제품 정보
+    val startDate: String,  //시작 일시
+    val endDate: String,    //종료 일시
+    val content: String,    //내용
+    val flag: Int           //상태
 )

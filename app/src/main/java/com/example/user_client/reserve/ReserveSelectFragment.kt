@@ -64,11 +64,14 @@ class ReserveSelectFragment : Fragment() {
             //날짜 형식 :: 2021-11-09
             lateinit var localDate: String
             if (dayOfMonth < 10)
-                localDate = "${year}-${month}-0${dayOfMonth}"
+                localDate = "${year}-${month+1}-0${dayOfMonth}"
             else
-                localDate = "${year}-${month}-${dayOfMonth}"
+                localDate = "${year}-${month+1}-${dayOfMonth}"
+
             //고객 주소기반 이용가능한 시간 조회(달력 선택일 + 버튼에 적힌 시간, 고객 주소)
             findAvailableTime(localDate, viewModel.address.value!!)
+            //재예약
+            findAvailableTimeForReturn(localDate)
             //버튼 터치 이벤트(달력 선택일)
             setButtons(localDate)
         }
@@ -82,6 +85,7 @@ class ReserveSelectFragment : Fragment() {
         //통신
         getData.findAvailableTime(date, address).enqueue(object : Callback<List<Boolean>> {
             override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
+                Log.d("예약 통신 성공", response.body().toString())
                 val list: List<Boolean> = response.body()!!
                 //활성 비활성 설정을 위한 버튼 리스트
                 val buttonList: List<Button> = listOf(
@@ -100,6 +104,20 @@ class ReserveSelectFragment : Fragment() {
 
             override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
                 Log.e("통신실패 !! ", "에러명 ${t}")
+            }
+        })
+    }
+    
+    //고객 재예약 정보
+    fun findAvailableTimeForReturn(date: String){
+        val reservationService = RetrofitInstance().getReservationSchedule()
+        reservationService.findAvailableTimeForReturn(3L, date).enqueue(object : Callback<List<Boolean>>{
+            override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
+                Log.d("재예약 통신성공", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
+                Log.e("통신 실패 : ", t.toString())
             }
         })
     }

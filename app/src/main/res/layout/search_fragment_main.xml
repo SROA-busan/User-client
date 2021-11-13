@@ -8,59 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/reserve_main"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@drawable/button_shape"
-                android:layout_marginTop="@dimen/pageMarginAndOffset"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_menu_height">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="예약현황"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/menu_font_size"
-                    android:textColor="@color/gray"
-                    android:gravity="center"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/appCompatTextView"
-                    android:layout_marginLeft="@dimen/pageMarginAndOffset"
-                    android:layout_marginStart="@dimen/pageMarginAndOffset"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/arrow"
-                    android:layout_width="@dimen/arrow_length"
-                    android:layout_height="@dimen/arrow_length"
-                    android:src="@drawable/baseline_arrow_forward_ios_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:scrollbarSize="10dp"
-                    android:layout_marginRight="@dimen/pageMarginAndOffset"
-                    android:layout_marginEnd="@dimen/pageMarginAndOffset"
-                    android:layout_marginTop="15dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/search_recycler_main"
-                    android:src="@drawable/baseline_home_24"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-        </ScrollView>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="@dimen/main_menu_margin_top"
             android:background="@drawable/button_shape"

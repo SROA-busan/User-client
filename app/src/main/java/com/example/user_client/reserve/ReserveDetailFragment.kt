@@ -3,25 +3,14 @@ package com.example.user_client.reserve
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
 import com.example.user_client.databinding.ReserveFragmentDetailBinding
-import com.example.user_client.dto.ReserveData
-import com.example.user_client.network.RetrofitInstance
-import com.example.user_client.sign.SignInActivity
 import com.example.user_client.viewModel.ReserveViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.*
 
 class ReserveDetailFragment : Fragment() {
     private var _binding: ReserveFragmentDetailBinding? = null

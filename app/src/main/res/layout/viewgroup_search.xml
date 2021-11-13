@@ -6,16 +6,6 @@
             android:layout_width="match_parent"
             android:layout_height="120dp">
 
-        <TextView
-                android:text="10:12 오전 10:30"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/search_datetime"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="@dimen/pageMargin"
-                android:layout_marginStart="@dimen/pageMargin"
-                android:layout_marginTop="@dimen/pageMarginHalf"/>
 
         <TextView
                 android:text="냉장고"
@@ -23,17 +13,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/search_product"
-                app:layout_constraintTop_toBottomOf="@+id/search_datetime"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/pageMarginHalf"
                 android:layout_marginLeft="@dimen/pageMargin"
                 android:layout_marginStart="@dimen/pageMargin"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                />
 
         <TextView
-                android:text="얼음을 꺼냈는데 얼어있어요\n냉장고에 물을 넣었더니 안따뜻해요"
+                android:hint="2020-11-10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/search_textarea"
+                android:id="@+id/search_datetime"
                 app:layout_constraintTop_toBottomOf="@+id/search_product"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="@dimen/pageMargin"

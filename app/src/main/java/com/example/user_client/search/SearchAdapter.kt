@@ -7,10 +7,10 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user_client.R
-import com.example.user_client.dto.SearchData
+import com.example.user_client.dto.CustomerResesrvationInfo
 
 
-class SearchAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.Adapter<SearchAdapter.SearchDataViewHolder>() {
+class SearchAdapter(private val dataset: ArrayList<CustomerResesrvationInfo>) : RecyclerView.Adapter<SearchAdapter.SearchDataViewHolder>() {
     //커스텀 리스너
     interface OnItemClickListener{
         fun onItemClick(view: View, position: Int)
@@ -26,8 +26,8 @@ class SearchAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.A
     inner class SearchDataViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val dateTime = view.findViewById<TextView>(R.id.search_datetime)
         val product = view.findViewById<TextView>(R.id.search_product)
-        val textArea = view.findViewById<TextView>(R.id.search_textarea)
         val process = view.findViewById<TextView>(R.id.search_process)
+        val imageButton = view.findViewById<ImageButton>(R.id.search_imageButton)
 
         init {
             view.setOnClickListener {
@@ -41,21 +41,41 @@ class SearchAdapter(private val dataset: ArrayList<SearchData>) : RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchDataViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_viewgroup, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.viewgroup_search, parent, false)
         return SearchDataViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SearchDataViewHolder, position: Int) {
-        var process = dataset[position].process
-        holder.dateTime.text = dataset[position].dateTime
-        holder.product.text = dataset[position].product
-        holder.textArea.text = dataset[position].productInfo
-        holder.process.text = process
+        var process = dataset[position].flag
+        holder.product.text = dataset[position].productName
+        holder.dateTime.text = dataset[position].startDate + " ~ " + dataset[position].endDate
+//        0-> 예약완료 , 1 -> 처리 완료, 2 -> 수령, 3 -> 수리 완료, 4 -> 반납예약완료, 5-> 평가 완료
         //진행상황별 라벨색 변경
         when(process){
-            "진행중" -> holder.process.setBackgroundResource(R.drawable.label_blue)
-            "입고완료", "상세보기" -> holder.process.setBackgroundResource(R.drawable.label_green)
-            "예약대기" -> holder.process.setBackgroundResource(R.drawable.label_red)
+            0 -> {
+                holder.process.setBackgroundResource(R.drawable.label_skyblue)
+                holder.process.text = "예약완료"
+            }
+            1-> {
+                holder.process.setBackgroundResource(R.drawable.label_green)
+                holder.process.text = "처리완료"
+            }
+            2 -> {
+                holder.process.setBackgroundResource(R.drawable.label_blue)
+                holder.process.text = "수령"
+            }
+            3 -> {
+                holder.process.setBackgroundResource(R.drawable.label_red)
+                holder.process.text = "수리완료"
+            }
+            4 -> {
+                holder.process.setBackgroundResource(R.drawable.label_yellow)
+                holder.process.text = "반납예약완료"
+            }
+            5 -> {
+                holder.process.setBackgroundResource(R.drawable.label_green)
+                holder.process.text = "평가완료"
+            }
         }
     }
 

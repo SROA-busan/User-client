@@ -20,12 +20,11 @@ import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity(){
     companion object{
-        private lateinit var _UserId: String //Test
-        val userId get() = _UserId
+        var userId = ""
     }
     private lateinit var binding: SignInActivityBinding
     private val view get() = binding!!
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SignInActivityBinding.inflate(layoutInflater)
@@ -33,11 +32,11 @@ class SignInActivity : AppCompatActivity(){
 
         //영문만 입력
         //TODO backspace입력해도 메시지 뜸
-        binding.userId.filters = arrayOf(inputFilter())
+//        binding.userId.filters = arrayOf(inputFilter())
         
         //로그인
         binding.signInButton.setOnClickListener {
-            _UserId = binding.userId.text.toString()
+            userId = binding.userId.text.toString()
             signIn(userId, binding.password.text.toString())
 //            startActivity(Intent(this, MainActivity::class.java))
         }
@@ -47,7 +46,7 @@ class SignInActivity : AppCompatActivity(){
         }
         //아이디/비밀번호 조회
         binding.findInfoButton.setOnClickListener {
-            startActivity(Intent(this, FindSignInfoActivity::class.java))
+            startActivity(Intent(this, SearchAddress::class.java))
         }
     }
     

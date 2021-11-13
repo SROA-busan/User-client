@@ -1,9 +1,6 @@
 package com.example.user_client.service
 
-import com.example.user_client.dto.CustomerReservationDetailInfo
-import com.example.user_client.dto.CustomerResesrvationInfo
-import com.example.user_client.dto.ReserveData
-import com.example.user_client.dto.UserInfo
+import com.example.user_client.dto.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,7 +23,7 @@ interface GetSignInService {
 }
 
 //유저정보 관련 api
-interface GetDataService {
+interface GetInquiryService {
     //id로 유저정보 로드
     @GET("/schedule/customer/requestReservationPage/{ID}")
     fun getUserInfo(@Path("ID") id: String): Call<UserInfo>
@@ -35,11 +32,12 @@ interface GetDataService {
     @GET("/schedule/customer/requestCurrentRepair/{id}")
     fun getCurrentRepairList(@Path("id") id: String): Call<List<CustomerResesrvationInfo>>
 
-    // 고객 어플 지난수리현황 클릭 -> 처리 완료된 일정 간략히 출력z
+    // 고객 어플 지난수리현황 클릭 -> 처리 완료된 일정 간략히 출력
     @GET("/schedule/customer/requestLastRepair/{id}")
     fun getLastRepairList(@Path("id") id: String): Call<List<CustomerResesrvationInfo>>
 
     //고객 하나의 일정에 대한 상세정보
+// 제품 상태가 0 예약, 3 입고 이면서 enddate!=null (반납예약완료) 인 물품만 받음
     @GET("/schedule/customer/requestDetailSchedule/{scheduleNum}")
     fun getDetailRepairInfo(@Path("scheduleNum") scheduleNum: Long): Call<CustomerReservationDetailInfo>
 }
@@ -53,4 +51,19 @@ interface GetReservationSchedule{
     //예약정보 전송
     @POST("/schedule/allocateEngineer")
     fun pushReserveData(@Body reserveData: ReserveData): Call<List<String>>
+
+    //반납 예약
+    @GET("/schedule/findAvailableTimeForReturn/{scheduleNum}/{date}")
+    fun findAvailableTimeForReturn(@Path("scheduleNum")scheduleNum: Long, @Path("date")date: String): Call<List<Boolean>>
+
+    //반납 예약정보 전송
+    @POST("/schedule/allocateReturn/{scheduleNum}/{dateTime}")
+    fun pushReReserveDate(@Path("scheduleNum")scheduleNum: Long, @Path("dateTime") dateTime: String): Call<Boolean>
+}
+
+//평가 입력
+interface PutEvaluation{
+    //고객이 평가 입력
+    @POST("/evaluation/customer/writeEvaluation")
+    fun writeEvaluation(@Body form: WriteEvaluation): Call<Boolean>
 }

@@ -18,28 +18,34 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchCurrentActivity : AppCompatActivity() {
-    companion object {
-        val dataset = ArrayList<SearchData>()
-    }
-
+    private val dataset = ArrayList<CustomerResesrvationInfo>()
     private lateinit var binding: SearchActivityCurrentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SearchActivityCurrentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //고객 예약정보 조회
         getCurrentRepairList()
-        setRecycler()
     }
 
-    //고객의 현재 예약정보 조회 flag = 2, 3, 4
+    //고객의 현재 예약정보 조회
     fun getCurrentRepairList() {
-        val currentRepairList = RetrofitInstance().getData()
 
+        val currentRepairList = RetrofitInstance().getData()
         currentRepairList.getCurrentRepairList(SignInActivity.userId)
             .enqueue(object: Callback<List<CustomerResesrvationInfo>>{
                 override fun onResponse(call: Call<List<CustomerResesrvationInfo>>, response: Response<List<CustomerResesrvationInfo>>) {
-                    Log.d("현재 상태 : ", response.body().toString())
+                    //받은 리스트를 데이터 셋에 추가
+                    if(response.body() != null)
+                        response.body()!!.forEach {
+                            dataset.add(it)
+                        }
+                    //TODO 값이 이상함
+//                  [CustomerResesrvationInfo(scheduleNum=2, productName=냉장고, startDate=2021-11-04 14:01, endDate=-, content=냉장고, flag=0)
+                    Log.d("현재 상태 : ", dataset.toString())
+                    //리사이클러뷰 설정
+                    setRecycler()
                 }
 
                 override fun onFailure(call: Call<List<CustomerResesrvationInfo>>, t: Throwable) {
@@ -51,22 +57,14 @@ class SearchCurrentActivity : AppCompatActivity() {
     //리사이클러뷰 셋팅
     private fun setRecycler() {
         val mRecyclerView = binding.searchRecyclerCurrent
-        //TODO 서버에서 기 예약된 정보 받아오기
-        val mSearchData = SearchData(
-            "2021-10-27",
-            "바퀴벌레",
-            "바퀴벌레가 바퀴타고 굴러다니고있어요",
-            "진행중",
-            R.color.진행중
-        )
-        dataset.add(mSearchData)
-
+        //넘겨줄 페이지 설정
         val intent = Intent(applicationContext, SearchDetailActivity::class.java)
         val adapter = SearchAdapter(dataset)
         //아이템 클릭 이벤트 설정
         adapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-                intent.putExtra("searchData", dataset.get(position))
+                //넘겨줄 데이터 설정
+                intent.putExtra("scheduleNum", dataset.get(position).scheduleNum)
                 startActivity(intent)
             }
         })

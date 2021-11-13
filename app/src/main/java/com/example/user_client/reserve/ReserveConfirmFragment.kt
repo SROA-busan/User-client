@@ -57,7 +57,8 @@ class ReserveConfirmFragment: Fragment() {
             val mMainActivity = activity as MainActivity
             //예약 푸싱
             pushReserveData()
-
+            //TODO 재예약 푸싱
+//            pushReReserveDate(viewModel.confirmDateTime.value!!)
             mMainActivity.changeReserveFragment("detail")
         }
     }
@@ -75,10 +76,11 @@ class ReserveConfirmFragment: Fragment() {
             viewModel.content.value!!       //상세내용
         )
         //일정 예약 인스턴스 호출
-        val pushReserveSchdule = RetrofitInstance().getReservationSchedule()
+        val pushReserveService = RetrofitInstance().getReservationSchedule()
         //예약정보 전송
-        pushReserveSchdule.pushReserveData(reserveData).enqueue(object : Callback<List<String>> {
+        pushReserveService.pushReserveData(reserveData).enqueue(object : Callback<List<String>> {
             override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+                Log.d("예약 푸싱 성공", response.body().toString())
                 viewModel.engineerName.value = response.body()!!.get(0)         //엔지니어 이름
                 viewModel.serviceCenterName.value = response.body()!!.get(1)    //서비스 센터 이름
                 viewModel.engineerPhoneNumber.value = response.body()!!.get(2)  //엔지니어 전화번호
@@ -86,6 +88,20 @@ class ReserveConfirmFragment: Fragment() {
 
             override fun onFailure(call: Call<List<String>>, t: Throwable) {
                 Log.e("내용 : ", "통신실패 ${t}")
+            }
+        })
+    }
+    
+    //재예약 푸싱
+    private fun pushReReserveDate(date: String){
+        val pushReReservationService = RetrofitInstance().getReservationSchedule()
+        pushReReservationService.pushReReserveDate(5L, date).enqueue(object: Callback<Boolean>{
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                Log.d("재 예약 푸싱 성공", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Log.e("통신 실패", t.toString())
             }
         })
     }
