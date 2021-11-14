@@ -54,11 +54,16 @@ class ReserveConfirmFragment: Fragment() {
     //버튼 이벤트
     private fun setButtonEvent(){
         binding.reserveConfirmButton.setOnClickListener {
+            if(viewModel.reReservation.value!!){
+                //재예약 푸싱
+                pushReReserveDate(viewModel.confirmDateTime.value!!, viewModel.scheduleNum.value!!)
+            }
+            else{
+                //예약 푸싱
+                pushReserveData()
+            }
+
             val mMainActivity = activity as MainActivity
-            //예약 푸싱
-            pushReserveData()
-            //TODO 재예약 푸싱
-//            pushReReserveDate(viewModel.confirmDateTime.value!!)
             mMainActivity.changeReserveFragment("detail")
         }
     }
@@ -93,9 +98,9 @@ class ReserveConfirmFragment: Fragment() {
     }
     
     //재예약 푸싱
-    private fun pushReReserveDate(date: String){
+    private fun pushReReserveDate(date: String, scheduleNum: Long){
         val pushReReservationService = RetrofitInstance().getReservationSchedule()
-        pushReReservationService.pushReReserveDate(5L, date).enqueue(object: Callback<Boolean>{
+        pushReReservationService.pushReReserveDate(scheduleNum, date).enqueue(object: Callback<Boolean>{
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 Log.d("재 예약 푸싱 성공", response.body().toString())
             }

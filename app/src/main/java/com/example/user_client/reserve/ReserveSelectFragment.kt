@@ -68,10 +68,15 @@ class ReserveSelectFragment : Fragment() {
             else
                 localDate = "${year}-${month+1}-${dayOfMonth}"
 
-            //고객 주소기반 이용가능한 시간 조회(달력 선택일 + 버튼에 적힌 시간, 고객 주소)
-            findAvailableTime(localDate, viewModel.address.value!!)
             //재예약
-            findAvailableTimeForReturn(localDate)
+            if(viewModel.reReservation.value!!){
+                findAvailableTimeForReturn(localDate)
+            }
+            //새 예약
+            else{
+                //고객 주소기반 이용가능한 시간 조회(달력 선택일 + 버튼에 적힌 시간, 고객 주소)
+                findAvailableTime(localDate, viewModel.address.value!!)
+            }
             //버튼 터치 이벤트(달력 선택일)
             setButtons(localDate)
         }
@@ -114,6 +119,20 @@ class ReserveSelectFragment : Fragment() {
         reservationService.findAvailableTimeForReturn(3L, date).enqueue(object : Callback<List<Boolean>>{
             override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
                 Log.d("재예약 통신성공", response.body().toString())
+                val list: List<Boolean> = response.body()!!
+                //활성 비활성 설정을 위한 버튼 리스트
+                val buttonList: List<Button> = listOf(
+                    binding.button,
+                    binding.button2,
+                    binding.button3,
+                    binding.button4,
+                    binding.button5,
+                    binding.button6
+                )
+                //버튼별 활성&비활성화
+                for (i in list.indices) {
+                    buttonList[i].isEnabled = list[i]
+                }
             }
 
             override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {

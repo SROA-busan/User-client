@@ -13,4 +13,7 @@ class ReserveViewModel : ViewModel() {
     val serviceCenterName = MutableLiveData<String>() //서비스 센터이름
     val engineerName = MutableLiveData<String>() //엔지니어 이름
     val engineerPhoneNumber = MutableLiveData<String>() //엔지니어 전화번호
+
+    val reReservation = MutableLiveData<Boolean>(false)//false 일경우 새 예약, true 일경우 재 예약
+    val scheduleNum = MutableLiveData<Long>()
 }

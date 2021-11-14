@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit
 class RetrofitInstance {
     companion object{
 //        private val BASE_URL = "http://3.36.122.237:"
-        private val BASE_URL = "http://192.168.162.193:"
-//        private val BASE_URL = "http://192.168.0.9:"
-        private val accountBASE_URL = "http://3.36.130.67:"
-        private val reserveBASE_URL = "http://13.125.161.56:"
-        private val inquiryBASE_URL = "http://3.34.140.158:"
-        private val evalutionBASE_URL = "http://52.78.98.197:"
+        private val BASE_URL = "http://172.30.1.20:"
+
+        private val accountBASE_URL = "http://13.125.26.25:"
+        private val reserveBASE_URL = "http://13.124.169.12:"
+        private val inquiryBASE_URL = "http://3.34.182.42:"
+        private val evalutionBASE_URL = "http://3.36.113.1:"
 
         private val ACCOUNT = "8081"
         private val RESERVATION_SCHEDULE = "8083"
@@ -39,7 +39,7 @@ class RetrofitInstance {
     fun getSignInInstance(): GetSignInService{
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(accountBASE_URL+ACCOUNT)
+            .baseUrl(BASE_URL+ACCOUNT)
             .addConverterFactory(GsonConverterFactory.create())
             .client(setOkHttp())
             .build()
@@ -49,7 +49,7 @@ class RetrofitInstance {
     fun getReservationSchedule() : GetReservationSchedule {
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(reserveBASE_URL+ RESERVATION_SCHEDULE)
+            .baseUrl(BASE_URL+ RESERVATION_SCHEDULE)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GetReservationSchedule::class.java)
@@ -58,7 +58,7 @@ class RetrofitInstance {
     fun getData(): GetInquiryService{
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(inquiryBASE_URL+INQUERY_SCHEDULE)
+            .baseUrl(BASE_URL+INQUERY_SCHEDULE)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GetInquiryService::class.java)
@@ -69,7 +69,7 @@ class RetrofitInstance {
     fun putEvaluation(): PutEvaluation{
         return retrofit2.Retrofit
             .Builder()
-            .baseUrl(evalutionBASE_URL + EVALUATION)
+            .baseUrl(BASE_URL + EVALUATION)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PutEvaluation::class.java)

@@ -2,9 +2,11 @@ package com.example.user_client
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.databinding.MainActivityBinding
 import com.example.user_client.reserve.ReserveConfirmFragment
 import com.example.user_client.reserve.ReserveDetailFragment
@@ -12,6 +14,7 @@ import com.example.user_client.reserve.ReserveInputFragment
 import com.example.user_client.reserve.ReserveSelectFragment
 import com.example.user_client.search.SearchFragment
 import com.example.user_client.setting.SettingFragment
+import com.example.user_client.viewModel.ReserveViewModel
 import java.lang.Exception
 import kotlin.concurrent.fixedRateTimer
 
@@ -25,8 +28,26 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
+        val viewModel = ViewModelProvider(this).get(ReserveViewModel::class.java)
+
+        val intent = getIntent()
+        val from = intent.getIntExtra("from", -1)
+        val scheduleNum = intent.getLongExtra("scheduleNum", -1)
+        Log.d("from", from.toString())
+
+        //재 예약일경우
+        if(from == 1) {
+            //재예약 플래그
+            viewModel.reReservation.value = true
+            //스케줄 번호
+            viewModel.scheduleNum.value = scheduleNum
+            replaceFragment(ReserveInputFragment())
+        }
+        //그 외
+        else{
+            replaceFragment(MainFragment())
+        }
         setActionBar()
-        replaceFragment(MainFragment())
         setNavFragment()
     }
 
