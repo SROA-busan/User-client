@@ -3,6 +3,7 @@ package com.example.user_client.evalution
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import com.example.user_client.R
 import com.example.user_client.databinding.EvaluationActivityBinding

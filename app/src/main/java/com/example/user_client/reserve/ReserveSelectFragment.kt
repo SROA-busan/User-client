@@ -61,6 +61,10 @@ class ReserveSelectFragment : Fragment() {
         //달력 날짜변경 이벤트
         binding.calendarView2.setOnDateChangeListener { view, year, month, dayOfMonth ->
             binding.tableLayout.visibility = View.VISIBLE
+            //TODO 당일 시간 + 1시간인 버튼은 비활성화
+            val date = LocalDateTime.now().toString().substring(0, 16).replace("T", " ").split("-|:| ")
+            Log.d("현재 날짜 ", date.toString())
+
             //날짜 형식 :: 2021-11-09
             lateinit var localDate: String
             if (dayOfMonth < 10)

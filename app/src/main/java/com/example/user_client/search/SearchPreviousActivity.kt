@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.user_client.R
 import com.example.user_client.databinding.SearchActivityPreviousBinding
@@ -26,6 +28,9 @@ class SearchPreviousActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = SearchActivityPreviousBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setActionBar()
+        setTitle("이전내역조회")
 
         //이전 내역조회
         getPreviousRepairList()
@@ -74,6 +79,45 @@ class SearchPreviousActivity : AppCompatActivity() {
 
         mRecyclerView.adapter = adapter
         mRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+    }
+
+    //툴바 설정
+    private fun setActionBar(){
+        val toolbar = binding.mainToolBar
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+
+        actionBar!!.setDisplayHomeAsUpEnabled(false) //왼쪽버튼 사용여부
+        actionBar!!.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24) //왼쪽버튼 이미지 설정
+    }
+
+    //툴바 이름변경
+    fun setTitle(title: String){
+        binding.mainToolBar.title = title
+    }
+
+    //툴바 메뉴버튼 설정
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.main_toolbar_menu, menu) //main_toolbar_menu를 toolbar메뉴버튼으로 설정
+//        return true
+//    }
+
+    fun setHomeEnabled(flag: Boolean){
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(flag) //왼쪽버튼 사용여부
+    }
+
+
+    lateinit var fragment: Fragment
+    //툴바 메뉴 이벤트
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item!!.itemId){
+            android.R.id.home -> {
+                //TODO sldkfjlsdkjfl
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

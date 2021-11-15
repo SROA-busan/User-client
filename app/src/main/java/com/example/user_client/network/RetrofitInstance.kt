@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class RetrofitInstance {
     companion object{
 //        private val BASE_URL = "http://3.36.122.237:"
-        private val BASE_URL = "http://172.30.1.20:"
+        private val BASE_URL = "http://192.168.0.4:"
 
         private val accountBASE_URL = "http://13.125.26.25:"
         private val reserveBASE_URL = "http://13.124.169.12:"

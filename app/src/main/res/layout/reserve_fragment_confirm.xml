@@ -30,7 +30,7 @@
                 android:id="@+id/road_name_address"
                 android:text="@{viewModel.address}"
                 android:hint="도로명 주소"
-                android:textSize="@dimen/font_big"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -71,32 +71,43 @@
                 android:layout_width="match_parent"
                 android:background="@color/gray"
                 android:id="@+id/view2"/>
-
+        <TextView
+                android:id="@+id/phoneNumberText"
+                android:text="전화번호"
+                android:textSize="20sp"
+                android:layout_marginLeft="@dimen/reserve_side_margin"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
+                />
         <TextView
                 android:hint="폰 번호"
                 android:text="@{viewModel.phoneNumber}"
-                android:textSize="@dimen/font_nomal"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/phoneNumber"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberText"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="@dimen/reserve_side_margin"
                 android:layout_marginStart="@dimen/reserve_side_margin"
-                android:layout_marginTop="@dimen/reserve_top_margin"/>
+                android:layout_marginTop="10dp"/>
 
         <View
                 android:layout_marginTop="@dimen/reserve_center_margin"
                 app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
                 android:layout_height="8dp"
                 android:layout_width="match_parent"
-                android:background="@color/gray"
+                android:background="@color/light_gray"
                 android:id="@+id/view3"/>
 
         <TextView
                 android:hint="제품정보"
                 android:text="@{viewModel.classifyName}"
-                android:textSize="@dimen/font_nomal"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/view3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +121,7 @@
         <TextView
                 android:hint="content"
                 android:text="@{viewModel.content}"
-                android:textSize="@dimen/font_small"
+                android:textSize="18sp"
                 android:layout_marginLeft="@dimen/reserve_side_margin"
                 android:layout_marginTop="@dimen/reserve_center_margin"
                 app:layout_constraintTop_toBottomOf="@id/classfiyName"

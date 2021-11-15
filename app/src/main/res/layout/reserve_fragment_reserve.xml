@@ -31,44 +31,38 @@
                     android:layout_marginTop="40dp"
                     android:id="@+id/constraintLayout">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+
+                <TextView
+                        android:id="@+id/product"
+                        android:hint="케이스"
+                        android:textSize="15sp"
+                        android:text="@{viewModel.classifyName}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/linearLayout">
+                        />
 
-                    <TextView
-                            android:id="@+id/name"
-                            android:text="@{viewModel.customerName}"
-                            android:textSize="29sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-
-                    <TextView
-                            android:id="@+id/product"
-                            android:text="@{viewModel.classifyName}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-
-                    <TextView
-                            android:id="@+id/phone"
-                            android:text="@{viewModel.phoneNumber}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView
+                        android:id="@+id/phone"
+                        android:hint="전화번호"
+                        android:textSize="15sp"
+                        android:text="@{viewModel.phoneNumber}"
+                        app:layout_constraintTop_toBottomOf="@id/product"
+                        app:layout_constraintLeft_toLeftOf="@id/product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                 <TextView
                         android:id="@+id/address"
+                        android:hint="주소"
+                        android:textSize="15sp"
                         android:text="@{viewModel.address}"
+                        app:layout_constraintTop_toBottomOf="@id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="@id/product"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <CalendarView
@@ -102,7 +96,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
 
                     <Button
                             android:text="10:30"
@@ -111,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button2"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
 
                     <Button
                             android:text="12:30"
@@ -120,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button3"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
                 </TableRow>
 
                 <TableRow
@@ -135,7 +129,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button4"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
 
                     <Button
                             android:text="15:30"
@@ -144,7 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button5"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
 
                     <Button
                             android:text="17:00"
@@ -153,7 +147,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/button6"
-                            app:backgroundTint="#5C000000"/>
+                            app:backgroundTint="@color/skyblue"/>
                 </TableRow>
             </TableLayout>
 

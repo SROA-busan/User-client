@@ -2,6 +2,7 @@ package com.example.user_client.sign
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.user_client.MainActivity
+import com.example.user_client.R
 import com.example.user_client.databinding.SignInActivityBinding
 import com.example.user_client.network.RetrofitInstance
 import com.example.user_client.service.GetSignInService
@@ -30,15 +32,20 @@ class SignInActivity : AppCompatActivity(){
         binding = SignInActivityBinding.inflate(layoutInflater)
         setContentView(view.root)
 
-        //영문만 입력
-        //TODO backspace입력해도 메시지 뜸
-//        binding.userId.filters = arrayOf(inputFilter())
-        
+        //영문, 숫자만 입력
+        binding.userId.filters = arrayOf(inputFilter())
+
         //로그인
         binding.signInButton.setOnClickListener {
             userId = binding.userId.text.toString()
-            signIn(userId, binding.password.text.toString())
-//            startActivity(Intent(this, MainActivity::class.java))
+            //            if(binding.userId.toString().contains("^[a-zA-Z]+\$")){
+//                binding.signInIdWarning.text = "숫자만 입력은 불가"
+//            }
+            //입력값 검증
+            if(checkSignIn("signInButton")){
+                signIn(userId, binding.password.text.toString())
+//                startActivity(Intent(this, MainActivity::class.java))
+            }
         }
         //회원가입
         binding.signUpButton.setOnClickListener {
@@ -68,10 +75,10 @@ class SignInActivity : AppCompatActivity(){
                     }
                     //존재하지 않는 아이디 1
                     else if (response.body() == 1)
-                        Toast.makeText(applicationContext, "존재하지 않는 아이디.", Toast.LENGTH_SHORT).show();
+                        checkSignIn("canNotUse")
                     //비밀번호 틀림 2
                     else if (response.body() == 2)
-                        Toast.makeText(applicationContext, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                        checkSignIn("wrongPassword")
                     // 그 외
                     else
                         Log.d("상태 : ", "response.body() = " + response.body())
@@ -84,6 +91,45 @@ class SignInActivity : AppCompatActivity(){
 
             })
         }
+    }
+    //아이디 입력검사
+    private fun checkSignIn(case: String): Boolean{
+        //초기값
+        binding.apply{
+            signInIdWarning.text = ""
+            signInIdWarning.setTextColor(resources.getColor(R.color.blue))
+            signInPasswordWarning.text = ""
+            signInPasswordWarning.setTextColor(resources.getColor(R.color.blue))
+        }
+        when(case){
+            "signInButton" -> {
+                if(binding.userId.text.isNullOrBlank()){
+                    binding.signInIdWarning.apply {
+                        text = "아이디를 입력해주세요"
+                        return false
+                    }
+                }
+                if(binding.password.text.isNullOrBlank()){
+                    binding.signInPasswordWarning.apply {
+                        text = "비밀번호를 입력해주세요"
+                        return false
+                    }
+                }
+            }
+            "checkRedex" -> binding.signInIdWarning.apply {
+                setTextColor(resources.getColor(R.color.red))
+                text = "영문, 숫자, 특수문자를 입력해주세요"
+            }
+            "canNotUse" -> binding.signInIdWarning.apply {
+                setTextColor(resources.getColor(R.color.red))
+                text = "아이디를 찾을 수 없습니다."
+            }
+            "wrongPassword" -> binding.signInPasswordWarning.apply {
+                setTextColor(resources.getColor(R.color.red))
+                text = "비밀번호가 틀렸습니다."
+            }
+        }
+        return true
     }
     // 영문만 허용
     fun inputFilter() = object : InputFilter {
@@ -101,11 +147,11 @@ class SignInActivity : AppCompatActivity(){
             영문만 허용(숫자 포함)
                 ^[a-zA-Z0-9]+$
              */
-            val regex = "^[a-zA-Z]+\$"
+            val regex = "^[a-zA-Z0-9]+\$"
             val ps = Pattern.compile(regex)
 
             if (!ps.matcher(source).matches()) {
-                Toast.makeText(applicationContext, "영어만 입력해주세요", Toast.LENGTH_SHORT).show()
+                checkSignIn("checkRedex")
                 return ""
             }
             return null

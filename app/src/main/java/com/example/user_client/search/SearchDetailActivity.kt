@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.user_client.MainActivity
 import com.example.user_client.R
@@ -57,7 +58,14 @@ class SearchDetailActivity : AppCompatActivity() {
                     response.body()!!.apply {
                         binding.searchDetailInquiryDate.text = startDate + " ~ " + endDate
                     }
-
+                    //반납예약 활성화
+                    if(response.body()!!.status == 3){
+                        binding.searchDetailRepairButton.visibility = View.VISIBLE
+                    }
+                    //평가입력 활성화
+                    if(response.body()!!.status == 1){
+                        binding.searchDetailEvaluationButton.visibility = View.VISIBLE
+                    }
                     //전화버튼 설정
                     setCallButton(response.body()!!.engineerPhoneNum)
                 }
