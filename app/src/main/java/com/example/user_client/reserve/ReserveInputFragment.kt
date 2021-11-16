@@ -40,11 +40,13 @@ class ReserveInputFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        
+
         //타이틀 설정
         setToolBarTitle("예약")
         //스피너 설정
         setSpinner()
+        //상세내용 입력칸 설정
+        setReservationDetailInput()
         //저장된 사용자의 정보 호출(이름, 주소, 전화번호)
         getUserInfo(SignInActivity.userId)
         //버튼 이벤트 할당
@@ -69,6 +71,18 @@ class ReserveInputFragment : Fragment() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
             binding.reserveProduct.adapter = adapter
+        }
+    }
+
+    //재예약시 상세내용 입력 불가
+    private fun setReservationDetailInput(){
+        //재예약
+        if(viewModel.reReservation.value!!){
+            binding.reserveProductInfo.visibility = View.INVISIBLE
+        }
+        //예약
+        else{
+            binding.reserveProductInfo.visibility = View.VISIBLE
         }
     }
 

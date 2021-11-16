@@ -103,6 +103,10 @@ class ReserveConfirmFragment: Fragment() {
         pushReReservationService.pushReReserveDate(scheduleNum, date).enqueue(object: Callback<Boolean>{
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 Log.d("재 예약 푸싱 성공", response.body().toString())
+                viewModel.apply {
+                    confirmDateTime.value = ""
+                    reReservation.value = false
+                }
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {

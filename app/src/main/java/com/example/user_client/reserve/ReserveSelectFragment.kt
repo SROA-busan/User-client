@@ -30,6 +30,7 @@ class ReserveSelectFragment : Fragment() {
     private var _binding: ReserveFragmentReserveBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ReserveViewModel
+    private lateinit var buttonList: List<Button>
 
     //inflate
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,6 +44,16 @@ class ReserveSelectFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReserveViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        //활성 비활성 설정을 위한 버튼 리스트
+        buttonList = listOf(
+            binding.button,
+            binding.button2,
+            binding.button3,
+            binding.button4,
+            binding.button5,
+            binding.button6
+        )
 
         //뒤로가기 이벤트
         setBackPressed()
@@ -60,10 +71,6 @@ class ReserveSelectFragment : Fragment() {
     fun setCalendarEvent(){
         //달력 날짜변경 이벤트
         binding.calendarView2.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            binding.tableLayout.visibility = View.VISIBLE
-            //TODO 당일 시간 + 1시간인 버튼은 비활성화
-            val date = LocalDateTime.now().toString().substring(0, 16).replace("T", " ").split("-|:| ")
-            Log.d("현재 날짜 ", date.toString())
 
             //날짜 형식 :: 2021-11-09
             lateinit var localDate: String
@@ -74,13 +81,17 @@ class ReserveSelectFragment : Fragment() {
 
             //재예약
             if(viewModel.reReservation.value!!){
-                findAvailableTimeForReturn(localDate)
+                Log.d("reReservation : ", viewModel.reReservation.value.toString())
+                findAvailableTimeForReturn(localDate, dayOfMonth)
             }
             //새 예약
             else{
+                binding.tableLayout.visibility = View.VISIBLE
+                Log.d("reReservation : ", viewModel.reReservation.value.toString())
                 //고객 주소기반 이용가능한 시간 조회(달력 선택일 + 버튼에 적힌 시간, 고객 주소)
-                findAvailableTime(localDate, viewModel.address.value!!)
+                findAvailableTime(localDate, viewModel.address.value!!, dayOfMonth)
             }
+
             //버튼 터치 이벤트(달력 선택일)
             setButtons(localDate)
         }
@@ -88,7 +99,7 @@ class ReserveSelectFragment : Fragment() {
 
     /* 고객 날짜 선택시 예약 가능 현황 조회
     * [ 09:00 ,10:30, 12:30, 14:00, 15:30, 17:00] */
-    private fun findAvailableTime(date: String, address: String) {
+    private fun findAvailableTime(date: String, address: String, dayOfMonth: Int) {
         //일정 예약 인스턴스 생성
         val getData = RetrofitInstance().getReservationSchedule()
         //통신
@@ -96,19 +107,13 @@ class ReserveSelectFragment : Fragment() {
             override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
                 Log.d("예약 통신 성공", response.body().toString())
                 val list: List<Boolean> = response.body()!!
-                //활성 비활성 설정을 위한 버튼 리스트
-                val buttonList: List<Button> = listOf(
-                    binding.button,
-                    binding.button2,
-                    binding.button3,
-                    binding.button4,
-                    binding.button5,
-                    binding.button6
-                )
+
                 //버튼별 활성&비활성화
                 for (i in list.indices) {
                     buttonList[i].isEnabled = list[i]
                 }
+                //당일일경우 1시간 이전은 예약불가
+                isToday(dayOfMonth)
             }
 
             override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
@@ -118,31 +123,56 @@ class ReserveSelectFragment : Fragment() {
     }
     
     //고객 재예약 정보
-    fun findAvailableTimeForReturn(date: String){
+    fun findAvailableTimeForReturn(date: String, toDay: Int){
         val reservationService = RetrofitInstance().getReservationSchedule()
         reservationService.findAvailableTimeForReturn(3L, date).enqueue(object : Callback<List<Boolean>>{
             override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
                 Log.d("재예약 통신성공", response.body().toString())
                 val list: List<Boolean> = response.body()!!
-                //활성 비활성 설정을 위한 버튼 리스트
-                val buttonList: List<Button> = listOf(
-                    binding.button,
-                    binding.button2,
-                    binding.button3,
-                    binding.button4,
-                    binding.button5,
-                    binding.button6
-                )
+
                 //버튼별 활성&비활성화
                 for (i in list.indices) {
                     buttonList[i].isEnabled = list[i]
                 }
+                showTable(toDay)
             }
 
             override fun onFailure(call: Call<List<Boolean>>, t: Throwable) {
                 Log.e("통신 실패 : ", t.toString())
             }
         })
+    }
+
+    //당일 예약 검사
+    private fun isToday(dayOfMonth: Int){
+        //당일 시간 + 1시간인 버튼은 비활성화
+        val date = LocalDateTime.now().toString().substring(0, 16).split("-", "T", ":")
+        Log.d("오늘", date.toString())
+        //당일 예약
+        if (date.get(2).equals(dayOfMonth.toString())){
+            Log.d("당일예약 : ", "true")
+            //현재시간 + 1보다 버튼의 시간이 작을경우 사용불가능
+            buttonList.forEach {
+                if(it.text.split(":").get(0).toInt() < date.get(1).toInt()+1){
+                    it.isEnabled = false
+                }
+            }
+        }
+    }
+
+    //당일포함 이전날일시 테이블 안보임
+    private fun showTable(toDay: Int){
+        val date = LocalDateTime.now().toString().substring(0, 16).split("-", "T", ":")
+        Log.d("달력 오늘 ", toDay.toString())
+        Log.d("진짜 오늘 ", date.toString())
+        if(date.get(2).toInt() >= toDay){
+            Log.d("당일 재예약 : ", "true")
+            binding.tableLayout.visibility = View.INVISIBLE
+            Toast.makeText(context, "당일, 이전예약은 할 수 없습니다.", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            binding.tableLayout.visibility = View.VISIBLE
+        }
     }
 
     //버튼별 이벤트 설정

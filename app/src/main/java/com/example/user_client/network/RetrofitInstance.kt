@@ -1,4 +1,4 @@
-package com.example.user_client.network
+    package com.example.user_client.network
 
 import com.example.user_client.service.GetInquiryService
 import com.example.user_client.service.GetReservationSchedule
@@ -12,13 +12,14 @@ import java.util.concurrent.TimeUnit
 //레트로핏 인스턴스를 생성하는 클래스
 class RetrofitInstance {
     companion object{
-//        private val BASE_URL = "http://3.36.122.237:"
-        private val BASE_URL = "http://192.168.0.4:"
+//        private val BASE_URL = "http://sroa-lb-106540279.ap-northeast-2.elb.amazonaws.com:"
+        private val BASE_URL = "http://192.168.162.193:"
 
-        private val accountBASE_URL = "http://13.125.26.25:"
-        private val reserveBASE_URL = "http://13.124.169.12:"
-        private val inquiryBASE_URL = "http://3.34.182.42:"
-        private val evalutionBASE_URL = "http://3.36.113.1:"
+//        private val accountBASE_URL = "http://13.125.26.25:"
+//        private val reserveBASE_URL = "http://13.124.169.12:"
+//        private val inquiryBASE_URL = "http://3.34.182.42:"
+//        private val evalutionBASE_URL = "http://3.36.113.1:"
+
 
         private val ACCOUNT = "8081"
         private val RESERVATION_SCHEDULE = "8083"

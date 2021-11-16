@@ -30,6 +30,8 @@ class ReserveDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        //재예약시 뷰 변경
+        setReservationDetailInput()
         //뒤로가기 이벤트
         setBackPressed()
         //버튼 이벤트
@@ -41,6 +43,26 @@ class ReserveDetailFragment : Fragment() {
         val activity = activity as MainActivity
         activity.setHomeEnabled(true)
         activity.fragment = ReserveConfirmFragment()
+    }
+
+    //재예약시 뷰 변경
+    private fun setReservationDetailInput(){
+        //재예약
+        if(viewModel.reReservation.value!!){
+            binding.apply {
+                confirmEngineerAddress.visibility = View.INVISIBLE
+                confirmEngineerInfo.visibility = View.INVISIBLE
+                confirmEngineerName.visibility = View.INVISIBLE
+            }
+        }
+        //예약
+        else{
+            binding.apply {
+                confirmEngineerAddress.visibility = View.VISIBLE
+                confirmEngineerInfo.visibility = View.VISIBLE
+                confirmEngineerName.visibility = View.VISIBLE
+            }
+        }
     }
 
     //버튼클릭 이벤트
