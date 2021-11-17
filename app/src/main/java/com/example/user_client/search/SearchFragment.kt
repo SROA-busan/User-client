@@ -43,6 +43,7 @@ class SearchFragment : Fragment() {
     //툴바 타이틀 설정
     fun setTitle(title: String) {
         val mMainactivity = activity as MainActivity
+        mMainactivity.setHomeEnabled(false)
         mMainactivity.setTitle(title)
     }
 

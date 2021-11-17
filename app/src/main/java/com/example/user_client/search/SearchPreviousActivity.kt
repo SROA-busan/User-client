@@ -102,24 +102,6 @@ class SearchPreviousActivity : AppCompatActivity() {
 //        return true
 //    }
 
-    fun setHomeEnabled(flag: Boolean){
-        val actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(flag) //왼쪽버튼 사용여부
-    }
-
-
-    lateinit var fragment: Fragment
-    //툴바 메뉴 이벤트
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item!!.itemId){
-            android.R.id.home -> {
-                //TODO sldkfjlsdkjfl
-
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
     }

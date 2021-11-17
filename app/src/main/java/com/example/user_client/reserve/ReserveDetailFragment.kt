@@ -3,6 +3,7 @@ package com.example.user_client.reserve
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,10 @@ class ReserveDetailFragment : Fragment() {
         //재예약
         if(viewModel.reReservation.value!!){
             binding.apply {
+                textArea.visibility = View.INVISIBLE
                 confirmEngineerAddress.visibility = View.INVISIBLE
+                confirmServiceInfo.visibility = View.INVISIBLE
+                confirmServiceCenterName.visibility = View.INVISIBLE
                 confirmEngineerInfo.visibility = View.INVISIBLE
                 confirmEngineerName.visibility = View.INVISIBLE
             }
@@ -58,7 +62,10 @@ class ReserveDetailFragment : Fragment() {
         //예약
         else{
             binding.apply {
+                textArea.visibility = View.VISIBLE
                 confirmEngineerAddress.visibility = View.VISIBLE
+                confirmServiceInfo.visibility = View.VISIBLE
+                confirmServiceCenterName.visibility = View.VISIBLE
                 confirmEngineerInfo.visibility = View.VISIBLE
                 confirmEngineerName.visibility = View.VISIBLE
             }
@@ -69,6 +76,7 @@ class ReserveDetailFragment : Fragment() {
     private fun setButtonEvent() {
         //전화버튼
         binding.confirmButtonCall.setOnClickListener {
+            Log.d("고객 전화번호", viewModel.engineerPhoneNumber.value.toString())
             //버튼 클릭시 전화번호 띄워주기기
             val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", viewModel.engineerPhoneNumber.value, null))
             startActivity(intent)

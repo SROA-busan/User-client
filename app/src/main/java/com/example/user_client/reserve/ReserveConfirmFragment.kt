@@ -39,6 +39,9 @@ class ReserveConfirmFragment: Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        //재예약시 비활성화
+        setReservationDetailInput()
+        
         //뒤로가기 이벤트
         setBackPressed()
         //버튼 이벤트
@@ -51,6 +54,27 @@ class ReserveConfirmFragment: Fragment() {
         activity.setHomeEnabled(true)
         activity.fragment = ReserveSelectFragment()
     }
+
+    //재예약시 뷰 변경
+    private fun setReservationDetailInput(){
+        //재예약
+        if(viewModel.reReservation.value!!){
+            binding.apply {
+                classfiyName.visibility = View.GONE
+                content.visibility = View.GONE
+                view4.visibility = View.GONE
+            }
+        }
+        //예약
+        else{
+            binding.apply {
+                classfiyName.visibility = View.VISIBLE
+                content.visibility = View.VISIBLE
+                view4.visibility = View.VISIBLE
+            }
+        }
+    }
+
     //버튼 이벤트
     private fun setButtonEvent(){
         binding.reserveConfirmButton.setOnClickListener {
@@ -104,8 +128,8 @@ class ReserveConfirmFragment: Fragment() {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 Log.d("재 예약 푸싱 성공", response.body().toString())
                 viewModel.apply {
-                    confirmDateTime.value = ""
                     reReservation.value = false
+                    //전화 안됨
                 }
             }
 

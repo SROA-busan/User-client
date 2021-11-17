@@ -46,8 +46,6 @@ class SearchCurrentActivity : AppCompatActivity() {
                         response.body()!!.forEach {
                             dataset.add(it)
                         }
-                    //TODO 값이 이상함
-//                  [CustomerResesrvationInfo(scheduleNum=2, productName=냉장고, startDate=2021-11-04 14:01, endDate=-, content=냉장고, flag=0)
                     Log.d("현재 상태 : ", dataset.toString())
                     //리사이클러뷰 설정
                     setRecycler()

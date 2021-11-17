@@ -51,7 +51,7 @@ class ReserveInputFragment : Fragment() {
         getUserInfo(SignInActivity.userId)
         //버튼 이벤트 할당
         setButtonEvent()
-        
+
     }
 
     //툴바 설정
@@ -60,7 +60,7 @@ class ReserveInputFragment : Fragment() {
         mMainactivity.setHomeEnabled(false)
         mMainactivity.setTitle(title)
     }
-    
+
 
     //스피너 설정
     private fun setSpinner() {
@@ -75,14 +75,21 @@ class ReserveInputFragment : Fragment() {
     }
 
     //재예약시 상세내용 입력 불가
-    private fun setReservationDetailInput(){
+    private fun setReservationDetailInput() {
         //재예약
-        if(viewModel.reReservation.value!!){
-            binding.reserveProductInfo.visibility = View.INVISIBLE
+        if (viewModel.reReservation.value!!) {
+            binding.apply {
+                reserveProductInfo.visibility = View.INVISIBLE
+                reserveProduct.visibility = View.GONE
+            }
+
         }
         //예약
-        else{
-            binding.reserveProductInfo.visibility = View.VISIBLE
+        else {
+            binding.apply {
+                reserveProductInfo.visibility = View.VISIBLE
+                reserveProduct.visibility = View.VISIBLE
+            }
         }
     }
 

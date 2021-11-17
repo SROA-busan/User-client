@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit
 //레트로핏 인스턴스를 생성하는 클래스
 class RetrofitInstance {
     companion object{
-//        private val BASE_URL = "http://sroa-lb-106540279.ap-northeast-2.elb.amazonaws.com:"
-        private val BASE_URL = "http://192.168.162.193:"
+        private val BASE_URL = "http://sroa-lb-206178950.ap-northeast-2.elb.amazonaws.com:"
+//        private val BASE_URL = "http://192.168.162.193:"
 
 //        private val accountBASE_URL = "http://13.125.26.25:"
 //        private val reserveBASE_URL = "http://13.124.169.12:"
