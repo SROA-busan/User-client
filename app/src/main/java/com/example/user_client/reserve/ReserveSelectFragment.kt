@@ -125,7 +125,7 @@ class ReserveSelectFragment : Fragment() {
     //고객 재예약 정보
     fun findAvailableTimeForReturn(date: String, toDay: Int){
         val reservationService = RetrofitInstance().getReservationSchedule()
-        reservationService.findAvailableTimeForReturn(3L, date).enqueue(object : Callback<List<Boolean>>{
+        reservationService.findAvailableTimeForReturn(viewModel.scheduleNum.value!!, date).enqueue(object : Callback<List<Boolean>>{
             override fun onResponse(call: Call<List<Boolean>>, response: Response<List<Boolean>>) {
                 Log.d("재예약 통신성공", response.body().toString())
                 val list: List<Boolean> = response.body()!!

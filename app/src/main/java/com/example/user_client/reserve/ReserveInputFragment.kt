@@ -31,7 +31,6 @@ class ReserveInputFragment : Fragment() {
         _binding = ReserveFragmentInputBinding.inflate(inflater, container, false)
         return binding.root
 
-        //TODO 재예약 일경우 텍스트에어리어 취소
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

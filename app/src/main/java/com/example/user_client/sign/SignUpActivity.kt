@@ -142,7 +142,7 @@ class SignUpActivity : AppCompatActivity() {
             영문만 허용(숫자 포함)
                 ^[a-zA-Z0-9]+$
              */
-            val regex = "^[a-zA-Z]+\$"
+            val regex = "^[a-zA-Z0-9]+\$"
             val ps = Pattern.compile(regex)
 
             if (!ps.matcher(source).matches()) {
