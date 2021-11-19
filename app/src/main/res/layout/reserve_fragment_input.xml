@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.example.user_client.viewModel.ReserveViewModel"/>
+                type="com.sroa.user_client.viewModel.ReserveViewModel"/>
     </data>
 
     <androidx.core.widget.NestedScrollView

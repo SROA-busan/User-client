@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.user_client">
+          package="com.sroa.user_client">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -16,36 +16,36 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.UserClient"
             android:usesCleartextTraffic="true">
-        <activity android:name=".evalution.EvaluationActivity">
+        <activity android:name="com.sroa.user_client.evalution.EvaluationActivity">
         </activity>
-        <activity android:name=".sign.SearchAddress">
+        <activity android:name="com.sroa.user_client.sign.SearchAddress">
         </activity>
 
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="ef2983c28dc7c7a556a4a0d858ed820c"/>
 
-        <activity android:name=".search.SearchDetailActivity">
+        <activity android:name="com.sroa.user_client.search.SearchDetailActivity">
         </activity>
-        <activity android:name=".sign.FindSignInfoActivity">
+        <activity android:name="com.sroa.user_client.sign.FindSignInfoActivity">
         </activity>
-        <activity android:name=".sign.SignUpActivity">
+        <activity android:name="com.sroa.user_client.sign.SignUpActivity">
         </activity>
-        <activity android:name=".search.SearchCurrentActivity">
+        <activity android:name="com.sroa.user_client.search.SearchCurrentActivity">
         </activity>
-        <activity android:name=".search.SearchPreviousActivity">
+        <activity android:name="com.sroa.user_client.search.SearchPreviousActivity">
         </activity>
         <activity
-                android:name=".SplashActivity">
+                android:name="com.sroa.user_client.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.sroa.user_client.MainActivity">
         </activity>
-        <activity android:name=".sign.SignInActivity">
+        <activity android:name="com.sroa.user_client.sign.SignInActivity">
         </activity>
     </application>
 

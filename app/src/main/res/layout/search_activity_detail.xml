@@ -5,7 +5,7 @@
 
         <variable
                 name="detailInfo"
-                type="com.example.user_client.dto.CustomerReservationDetailInfo"/>
+                type="com.sroa.user_client.dto.CustomerReservationDetailInfo"/>
     </data>
 
     <androidx.core.widget.NestedScrollView
