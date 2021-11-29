@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="productList">
-        <item>냉장고</item>
-        <item>세탁기</item>
-        <item>스타일러</item>
+<!--        정수기로 바꾹;-->
+        <item>정수기 설치</item>
+        <item>부품 고장</item>
+        <item>부품 파손</item>
+        <item>필터교체</item>
     </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.user_client
+package com.sroa.user_client
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.user_client", appContext.packageName)
+        assertEquals("com.sroa.user_client", appContext.packageName)
     }
 }

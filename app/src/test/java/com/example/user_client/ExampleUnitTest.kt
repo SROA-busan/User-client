@@ -1,4 +1,4 @@
-package com.example.user_client
+package com.sroa.user_client
 
 import org.junit.Test
 

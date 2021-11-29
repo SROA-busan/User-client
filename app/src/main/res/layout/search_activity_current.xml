@@ -6,8 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".search.SearchCurrentActivity">
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@color/skyblue"
+            app:title="test"
+            app:titleTextColor="@color/black"
+            >
+    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_current"
+            app:layout_constraintTop_toBottomOf="@id/main_tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
